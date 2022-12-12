@@ -1,0 +1,36 @@
+<%-include('./layout/header.ejs')%>
+<form action="" class="formContainer" method="post" enctype="multipart/form-data">
+            
+    <label for="email">Product Name</label>
+    <input type="text" id="email" value="<%=product.name%>" name="name" required>
+    <br>
+
+    <label for="email">Product description</label>
+    <input type="text" id="email" value="<%=product.description%>" name="description" required>
+    <br>
+
+    <label for="email">Product Category</label>
+    <select id="cars" name="category">
+        <% if(category!=null){%>
+            <% category.forEach((test)=>{%>
+                <option value="<%=test.name%>"><%=test.name%></option>>
+            <%})%>
+        <%}%>
+    </select>
+    <br>
+
+    <label for="email">Product price</label>
+    <input type="number" id="email" value="<%=product.price%>" name="price" required>
+    <br>
+
+    <label for="email">Product quantity</label>
+    <input type="number" id="email" value="<%=product.quantity%>" name="quantity" required>
+    <br>
+
+    <input type="file" name="image" required>
+    <br>
+
+    <button type="submit" >Update</button>
+  </form>
+
+<%-include('./layout/footer.ejs')%>

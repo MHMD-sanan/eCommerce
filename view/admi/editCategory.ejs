@@ -1,0 +1,15 @@
+<%-include('./layout/header.ejs')%>
+
+<form action="" method="post" enctype="multipart/form-data">
+    <label for="category">category</label>
+    <br>
+    <input type="text" name="name" value="<%=user.name%>" readonly>
+    <br>
+    <label for="image" >choose an image</label>
+    <br>
+    <input type="file" name="image" required>
+    <br><br>
+    <button type="submit">Update</button>
+</form>
+
+<%-include('./layout/footer.ejs')%>
