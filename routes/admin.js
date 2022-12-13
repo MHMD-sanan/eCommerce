@@ -1,11 +1,16 @@
 const express = require('express');
 const router = express.Router();
 
+const auth=require('../middleware/admin/autj')
+
 const adminRouter = require('../controller/admin');
 
 const upload = require('../utils/multer')
 
-router.get('/', adminRouter.loadAdmin)
+router.get('/login',auth.isLogout,adminRouter.login)
+router.post ('/login',adminRouter.loginVerification)
+router.get('/',auth.isLogin,adminRouter.loadAdmin)
+router.get('/logout',adminRouter.logout)
 
 router.get('/users', adminRouter.loadUser)
 router.get('/updateUser', adminRouter.updateUser);

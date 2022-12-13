@@ -1,13 +1,16 @@
 const mailer=require('../utils/otp')
 const User=require('../model/user/userModel')
-const loadHome=(req,res)=>{
-    res.render('../view/user/home.ejs')
-}
+
 
 const loadSignup=(req,res)=>{
     res.render('../view/user/signup.ejs')
 }
-//let userData;
+
+const loadLogin=(req,res)=>{
+
+        res.render('../view/user/login.ejs')
+}
+
 const insertUser = async (req, res) => {
     try {
         userData=req.body;
@@ -25,8 +28,6 @@ const insertUser = async (req, res) => {
             html:`<p>Your OTP is ${mailer.OTP}</p>`,
         };
         mailer.mailTransporter.sendMail(mailDetails,(err,data)=>{
-
-            console.log(data);
             if(err){
                 console.log(err);
             }else{
@@ -41,14 +42,9 @@ const insertUser = async (req, res) => {
     }
 }
 
-function test(){
-    alert('ok');
-}
-
 const otpVerification=async(req,res)=>{
     try {
         if(req.body.otp==mailer.OTP){
-            console.log(userData.email);
             const user1=new User(userData);
             user1.save();
         
@@ -69,7 +65,9 @@ const userverification = async (req, res) => {
         const user = await User.findOne({ email:req.body.email});
         if(user){
             if(password === user.password) {
-            res.redirect('/')
+
+                req.session.user_id=user._id;
+                res.redirect('/')
             } else {
                 res.render('../view/user/login.ejs', { wrong: "Invalid Credentials" });
             }
@@ -82,8 +80,14 @@ const userverification = async (req, res) => {
     }
 }
 
-const loadLogin=(req,res)=>{
-    res.render('../view/user/login.ejs')
+const loadHome=(req,res)=>{
+
+        res.render('../view/user/home.ejs')
+}
+
+const logout=async (req,res)=>{
+    req.session.user_id=false;
+    res.redirect('/user_login');
 }
 
 module.exports={
@@ -92,5 +96,6 @@ module.exports={
     loadLogin,
     insertUser,
     userverification,
-    otpVerification
+    otpVerification,
+    logout
 }
