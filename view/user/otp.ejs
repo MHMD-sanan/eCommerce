@@ -1,56 +1,42 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
-    <!-- Bootstrap CSS -->
 
-    <link rel="stylesheet" href="/public/user/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/public/user/css/style.css">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
 
-    <title>Login #2</title>
-  </head>
-  <body>
-  
+  <link rel="stylesheet" href="/public/user/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/public/user/css/style.css">
+
+</head>
+
+<body>
   <div class="d-lg-flex half">
     <div class="bg order-1 order-md-2" style="background-image: url('/public/user/images/bg_1.jpg');"></div>
     <div class="contents order-2 order-md-1">
-
       <div class="container">
         <div class="row align-items-center justify-content-center">
           <div class="col-md-7">
-            <h3>Login to <strong>Colorlib</strong></h3>
+            <h3>Enter the <strong>OTP</strong></h3>
             <%if(locals.error){%>
               <div class="alert alert-danger" role="alert">
                 <%=locals.error%>
               </div>
-            <%}%>
-            <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
-            <form action="/otp" method="post">
-              <div class="form-group first">
-                <label for="username">OTP</label>
-                <input type="text" class="form-control" placeholder="enter the otp" name="otp">
-              </div>
-
-              
-              <!-- <div class="d-flex mb-5 align-items-center">
-                <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
-                  <input type="checkbox" checked="checked"/>
-                  <div class="control__indicator"></div>
-                </label>
-                <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span> 
-              </div> -->
-
-              <input type="submit" value="otp" class="btn btn-block btn-dark" onclick="test()">
-              <span class="ml-auto"><a href="user_signup" class="forgot-pass">Create an account</a></span> 
-              <script src="/controller/user.js"></script>
-            </form>
+              <%}%>
+                <form action="/otp" method="post">
+                  <div class="form-group first">
+                    <label>OTP</label>
+                    <input type="text" class="form-control" placeholder="Enter the otp" name="otp">
+                  </div>
+                  <input type="submit" value="SUBMIT" class="btn btn-block btn-dark">
+                </form>
           </div>
         </div>
       </div>
     </div>
   </div>
-  </body>
+</body>
 </html>

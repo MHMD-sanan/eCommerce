@@ -7,7 +7,11 @@ const productSchema=new mongoose.Schema({
     image:String,
     price:Number,
     quantity:Number,
-    color:String
+    color:String,
+    status:{
+        type:Boolean,
+        default:true
+      }
 })
 
 const Product=mongoose.model('Product',productSchema);

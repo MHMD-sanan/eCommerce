@@ -1,24 +1,13 @@
 const express = require('express');
 const app = express();
+require('./utils/comm/db')
+const session=require('./utils/comm/session')
 
-require('./utils/db')
-
-const session=require('express-session');
-const cookie=require('cookie-parser')
-app.use(session({
-    secret:'anyrandomkeyalubfdjjsjd',
-    saveUninitialized:true,
-    cookie:{maxAge:3000000},
-    resave:false
-}))
-app.use((req, res, next) => {
-    res.set("Cache-Control", "no-store");
-    next();
-});
-
-
+app.use(session.session)
+app.use(session.cache);
 
 app.set('view engine', 'ejs')
+
 app.use('/public', express.static(__dirname + '/public'));
 
 const bodyParser = require('body-parser');

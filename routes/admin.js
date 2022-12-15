@@ -1,32 +1,38 @@
 const express = require('express');
-const router = express.Router();
-
 const auth=require('../middleware/admin/autj')
+const upload = require('../utils/admin/multer')
 
-const adminRouter = require('../controller/admin');
+const router = express.Router();
+const admin=require('../controller/admin/login')
 
-const upload = require('../utils/multer')
+router.get('/login',admin.login)
+router.post('/login',admin.loginVerification)
+router.get('/' ,admin.loadAdmin)
+router.get('/logout',admin.logout)
 
-router.get('/login',auth.isLogout,adminRouter.login)
-router.post ('/login',adminRouter.loginVerification)
-router.get('/',auth.isLogin,adminRouter.loadAdmin)
-router.get('/logout',adminRouter.logout)
+const user=require('../controller/admin/user')
+router.get('/users',user.loadUser)
+router.get('/updateUser',  user.updateUser);
 
-router.get('/users', adminRouter.loadUser)
-router.get('/updateUser', adminRouter.updateUser);
+const category=require('../controller/admin/category')
+router.get('/category',  category.category);
+router.post('/category', upload.single('image'), category.insertCategory);
+router.get('/editCategory',  category.editCategory);
+router.post('/editCategory', upload.single('image'), category.updateCategory);
+router.get('/statusCategory',  category.statusCategory)
 
-router.get('/category', adminRouter.category);
-router.post('/category', upload.single('image'), adminRouter.insertCategory);
-router.get('/editCategory', adminRouter.editCategory);
-router.post('/editCategory', upload.single('image'), adminRouter.updateCategory);
-router.get('/deleteCategory', adminRouter.deleteCategory)
+const product=require('../controller/admin/product')
+router.get('/product',  product.product);
+router.post('/product', upload.single('image'), product.insertProduct);
+router.get('/statusProduct',  product.statusProduct);
+router.get('/editProduct',  product.editProduct)
+router.post('/editProduct', upload.single('image'), product.updateProduct);
 
-router.get('/product', adminRouter.product);
-router.post('/product', upload.single('image'), adminRouter.insertProduct);
-router.get('/deleteProduct', adminRouter.deleteProduct);
-router.get('/editProduct', adminRouter.editProduct)
-router.post('/editProduct', upload.single('image'), adminRouter.updateProduct);
-
-router.get('/coupen', adminRouter.coupen);
+const coupen=require('../controller/admin/coupon')
+router.get('/coupen',  coupen.coupen);
+router.post('/coupen',coupen.insertCoupen)
+router.get('/editCoupen', coupen.editCoupen);
+router.post('/editCoupen',coupen.updateCoupen);
+router.get('/deleteCoupen',coupen.statusCoupen)
 
 module.exports = router;

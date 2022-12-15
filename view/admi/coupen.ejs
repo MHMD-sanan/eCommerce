@@ -1,102 +1,200 @@
-<%-include('./layout/header.ejs')-%>
+<%-include('./layout/header.ejs')%>
 
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-      .openBtn {
-        display: flex;
-        justify-content: left;
-      }
-      .openButton {
-        border: none;
-        border-radius: 5px;
-        background-color: #1c87c9;
-        color: white;
-        padding: 14px 20px;
-        cursor: pointer;
-        position: fixed;
-      }
-      .loginPopup {
-        position: relative;
-        text-align: center;
-        width: 100%;
-      }
-      .formPopup {
-        display: none;
-        position: fixed;
-        left: 45%;
-        top: 5%;
-        transform: translate(-50%, 5%);
-        border: 3px solid #999999;
-        z-index: 9;
-      }
-      .formContainer {
-        max-width: 300px;
-        padding: 20px;
-        background-color: #fff;
-      }
-      .formContainer input[type=text],
-      .formContainer input[type=password] {
-        width: 100%;
-        padding: 15px;
-        margin: 5px 0 20px 0;
-        border: none;
-        background: #eee;
-      }
-      .formContainer input[type=text]:focus,
-      .formContainer input[type=password]:focus {
-        background-color: #ddd;
-        outline: none;
-      }
-      .formContainer .btn {
-        padding: 12px 20px;
-        border: none;
-        background-color: #8ebf42;
-        color: #fff;
-        cursor: pointer;
-        width: 100%;
-        margin-bottom: 15px;
-        opacity: 0.8;
-      }
-      .formContainer .cancel {
-        background-color: #cc0000;
-      }
-      .formContainer .btn:hover,
-      .openButton:hover {
-        opacity: 1;
-      }
-    </style>
-    <h2>Popup Form</h2>
-    <p>Click on the "Open Form" button to open the popup form.</p>
+<style>
+    * {
+      box-sizing: border-box;
+    }
+    .openBtn {
+      display: flex;
+      justify-content: right;
+    }
+    .openButton {
+      border: none;
+      border-radius: 5px;
+      background-color: #1c87c9;
+      color: white;
+      padding: 14px 20px;
+      cursor: pointer;
+    }
+    .loginPopup {
+      position: relative;
+      text-align: center;
+      width: 100%;
+    }
+    .formPopup {
+      display: none;
+      position: fixed;
+      left: 45%;
+      top: 5%;
+      transform: translate(-50%, 5%);
+      border: 3px solid #999999;
+      z-index: 9;
+    }
+    .formContainer {
+      max-width: 300px;
+      padding: 20px;
+      background-color: #fff;
+    }
+    .formContainer input[type=text],
+    .formContainer input[type=password] {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 20px 0;
+      border: none;
+      background: #eee;
+    }
+    .formContainer input[type=text]:focus,
+    .formContainer input[type=password]:focus {
+      background-color: #ddd;
+      outline: none;
+    }
+    .formContainer .btn {
+      padding: 12px 20px;
+      border: none;
+      background-color: #8ebf42;
+      color: #fff;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 15px;
+      opacity: 0.8;
+    }
+    .formContainer .cancel {
+      background-color: #cc0000;
+    }
+    .formContainer .btn:hover,
+    .openButton:hover {
+      opacity: 1;
+    }
+  </style>
+
+
+  <script>
+    function openForm() {
+      document.getElementById("popupForm").style.display = "block";
+    }
+    function closeForm() {
+      document.getElementById("popupForm").style.display = "none";
+    }
+
+
+    function openForm2() {
+      document.getElementById("popupForm2").style.display = "block";
+    }
+    function closeForm2() {
+      document.getElementById("popupForm2").style.display = "none";
+    }
+  </script>
+
+
+<div class="container-fluid px-4">
     <div class="openBtn">
-      <button class="openButton" onclick="openForm()"><strong>Open Form</strong></button>
-    </div>
-    <div class="loginPopup">
-      <div class="formPopup" id="popupForm">
-        <form action="/action_page.php" class="formContainer">
-          <h2>Please Log in</h2>
-          <label for="email">
-            <strong>E-mail</strong>
-          </label>
-          <input type="text" id="email" placeholder="Your Email" name="email" required>
-          <label for="psw">
-            <strong>Password</strong>
-          </label>
-          <input type="password" id="psw" placeholder="Your Password" name="psw" required>
-          <button type="submit" class="btn">Log in</button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-        </form>
+        
+        <button class="openButton my-3 me-2" onclick="openForm()"><strong>Add Coupon</strong></button>
       </div>
+      <div class="loginPopup">
+        <div class="formPopup" id="popupForm">
+          <form action="/admin_panel/coupen" class="formContainer" method="post">
+            
+            <label for="code">
+              <strong>coupon Code</strong>
+            </label>
+            <input  type="text" placeholder="Coupon Code" name="code" style="text-transform: uppercase ;" required>
+
+            <label for="discount">
+              <strong>Discount</strong>
+            </label>
+            <input type="number" placeholder="Discount" name="discount" required>
+
+            <label for="startDate">
+              <strong>Strat Date</strong>
+            </label>
+            <input type="date"  placeholder="Start Date" name="startDate" required>
+
+            <label for="endDate">
+              <strong>End Date</strong>
+            </label>
+            <input type="date" placeholder="End Date" name="endDate" required>
+
+            <button type="submit" class="btn">Add</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          </form>
+        </div>
+      </div>
+
+
+      <!-- edit form pop up -->
+
+      <div class="loginPopup">
+        <div class="formPopup" id="popupForm2">
+          <form action="/admin_panel/category" class="formContainer" method="post" enctype="multipart/form-data">
+            
+            <label for="email">
+              <strong>Category Nafhbdjfbme</strong>
+            </label>
+            <input type="text" id="email" placeholder="category name" name="name" required>
+            <label for="psw">
+              <strong>Choose the image</strong>
+            </label>
+            <br><br>
+            <input type="file" name="image" required>
+            <br><br>
+            <button type="submit" class="btn">Add</button>
+            <button type="button" class="btn cancel" onclick="closeForm2()">Close</button>
+          </form>
+        </div>
+      </div>
+
+    <!-- <ol class="breadcrumb mb-4">
+        <li class="breadcrumb-item"><a href="/admin_panel">Dashboard</a></li>
+        <li class="breadcrumb-item active">Tables</li>
+    </ol> -->
+    <!-- <div class="card mb-4">
+        <div class="card-body">
+            DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
+            <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
+            .
+        </div>
+    </div> -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Coupon List
+        </div>
+        <div class="card-body">
+            <% if(details!=null) { %>
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Discount</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% details.forEach(function(coupon){ %>
+                    <tr>
+                        <td style="text-transform:uppercase ;"><%=coupon.code%></td>
+                        <td><%=coupon.discount%>%</td>
+                        <td><%=coupon.startDate%></td>
+                        <td><%=coupon.endDate%></td>
+                        <td>
+                            
+                            <a class="btn btn-primary" href="/admin_panel/editCoupen?id=<%=coupon._id%>" role="button">Edit</a>
+                            <% if(coupon.status==true) {%>
+                              <a class="btn btn-danger" href="/admin_panel/deleteCoupen?id=<%= coupon._id%>" role="button">Unlist</a>
+                            <%}else{%>
+                              <a class="btn btn-success" href="/admin_panel/deleteCoupen?id=<%= coupon._id%>" role="button">List</a>
+                            <%}%>
+                        </td>
+                    </tr>   
+                    <% }) %>
+                </tbody>
+            </table>
+            <% } %>
+        </div>
     </div>
-    <script>
-      function openForm() {
-        document.getElementById("popupForm").style.display = "block";
-      }
-      function closeForm() {
-        document.getElementById("popupForm").style.display = "none";
-      }
-    </script>
+</div>
 
-
-<%-include('./layout/footer.ejs')-%>
+<%-include('./layout/footer.ejs')%>

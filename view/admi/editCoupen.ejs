@@ -1,0 +1,29 @@
+<%-include('./layout/header.ejs')%>
+
+<form action="" class="formContainer" method="post">
+            
+    <label for="code">
+      <strong>coupen Code</strong>
+    </label>
+    <input style="text-transform: uppercase ;" type="text" value="<%=coupenData.code%>" name="code" required>
+    <br>
+    <label for="discount">
+      <strong>Discount</strong>
+    </label>
+    <input type="number" value="<%=coupenData.discount%>" name="discount" required>
+<br>
+    <label for="startDate">
+      <strong>Strat Date</strong>
+    </label>
+    <input type="date" value="<%=coupenData.startDate%>"  name="startDate" required>
+<br>
+    <label for="endDate">
+      <strong>End Date</strong>
+    </label>
+    <input type="date" value="<%=coupenData.endDate%>" name="endDate" required>
+<br>
+    <button type="submit">Update</button>
+  </form>
+
+
+<%-include('./layout/footer.ejs')%>

@@ -170,11 +170,14 @@
                     <% details.forEach(function(category){ %>
                     <tr>
                         <td><%=category.name%></td>
-                        <td><img src="/public/category_images/<%=category.image%>" alt="" width="200px" height="100px"></td>
+                        <td><img src="/public/uploads/<%=category.image%>" alt="" width="200px" height="100px"></td>
                         <td>
-                            <!-- <button onclick="openForm2()">Edit</button> -->
-                            <a class="btn btn-primary" href="/admin_panel/editCategory?id=<%=category._id%>" role="button">Edit</a>
-                            <a class="btn btn-danger" href="/admin_panel/deleteCategory?id=<%=category._id%>" role="button">Delete</a>  
+                          <a class="btn btn-primary" href="/admin_panel/editCategory?id=<%=category._id%>" role="button">Edit</a>
+                          <% if(category.status==true) {%>
+                            <a class="btn btn-danger" href="/admin_panel/statusCategory?id=<%= category._id%>" role="button">Unlist</a>
+                          <%}else{%>
+                            <a class="btn btn-success" href="/admin_panel/statusCategory?id=<%= category._id%>" role="button">List</a>
+                            <%}%> 
                         </td>
                     </tr>   
                     <% }) %>
