@@ -4,10 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="author" content="Untree.co">
-    <!-- <link rel="shortcut icon" href="favicon.png"> -->
 
-    <meta name="description" content="" />
     <meta name="keywords" content="bootstrap, bootstrap4" />
 
     <!-- Bootstrap CSS -->
@@ -30,7 +27,7 @@
                     <li><a class="nav-link " href="/shop">Shop</a></li>
                 </ul>
                 <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">            
-                    <%if(locals.userData){%>
+                    <%if(locals.isLogin){%>
                         <div class="dropdown">
                             <li><a class="nav-link"><img src="/public/user/images/user.svg"></a></li>
                             <div class="dropdown-content">
@@ -40,6 +37,12 @@
                               <a href="/logout">Logout</a>
                             </div>
                         </div>
+                        <%if(cart!=null){%>
+                            <li>
+                                <a class="nav-link" href="/cart"><img src="/public/user/images/cart.svg">(<span id="cart-count"><%=cart.items.length%></span>)</a>
+                            </li>
+                        <%}%>
+
                     <%}else{%>
                         <li>
                             <a class="nav-link" href="/user_login">
@@ -47,7 +50,7 @@
                             </a>
                         </li>
                     <%}%>
-                    <li><a class="nav-link" href="cart.html"><img src="/public/user/images/cart.svg"></a></li>
+                    
                 </ul>
             </div>
         </div>

@@ -154,12 +154,11 @@
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>des</th>
-                        <th>cate</th>
-                        <th>image</th>
-                        <th>color</th>
-                        <th>price</th>
-                        <th>quantity</th>
+                        <th>Category</th>
+                        <th>Image</th>
+                        <th>Color</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -167,14 +166,12 @@
                     <% details.forEach(function(product){ %>
                     <tr>
                         <td><%=product.name%></td>
-                        <td><%=product.description%></td>
                         <td><%=product.category%></td>
                         <td><img src="/public/uploads/<%=product.image%>" alt="" width="70px" height="70px" style="border-radius:20px ;"></td>
                         <td><%=product.color%></td>
                         <td><%=product.price%></td>
                         <td><%=product.quantity%></td>
                         <td>
-                            
                           <a class="btn btn-primary" href="/admin_panel/editProduct?id=<%=product._id%>" role="button">Edit</a>
                           <% if(product.status==true) {%>
                             <a class="btn btn-danger" href="/admin_panel/statusProduct?id=<%= product._id%>" role="button">Unlist</a>

@@ -22,18 +22,17 @@
                 <div class="card-body p-5 text-center">
                     <h3 class="mb-5">Edit Category</h3>
                     <div class="form-outline mb-4">
-                      
                       <input type="text"  class="form-control form-control-lg" name="name" value="<%=user.name%>" readonly />
                       <label class="form-label" for="typeEmailX-2">Category Name</label>
                     </div>
-        
+
                     <div class="form-outline mb-4">
-                      <input type="file" class="form-control form-control-lg" name="image" required />
-                      <label class="form-label" for="typePasswordX-2">Choose Image</label>
+                      <img src="/public//uploads/<%=user.image%>" alt="" width="100px" height="100px" id="imgChange">
+                      <input type="file" class="form-control form-control-lg" name="image" onchange="changeImage(event)" required />
+                      <label class="form-label">Choose New Image</label>
                     </div>
-      
+
                     <button class="btn btn-dark btn-lg btn-block" type="submit">Update</button>
-                    
                     <hr class="my-4">
                     <a href="/admin_panel/category">back</a>
                   </div>
@@ -44,5 +43,11 @@
       </div>
     </div>
   </section>
+
+  <script>
+    function changeImage(event){
+      document.getElementById('imgChange').src=URL.createObjectURL(event.target.files[0])
+    }
+  </script>
 
 <%-include('./layout/footer.ejs')%>

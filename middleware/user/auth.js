@@ -5,15 +5,13 @@ const isLogin=async(req,res,next)=>{
         if(req.session.user_id){
             const userData=await User.findById({_id:req.session.user_id});
             if(userData.status==true){
-                console.log("user is available in db");
                 next()
             }else{
-                console.log("user is not available in db");
                 req.session.user_id=false
                 res.redirect('/')
                 }
             }else{
-            res.redirect('/')
+            res.redirect('/user_login')
         }
     } catch (error) {
         console.log(error)

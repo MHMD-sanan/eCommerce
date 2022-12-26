@@ -1,10 +1,9 @@
 const express = require('express');
 const auth=require('../middleware/admin/autj')
 const upload = require('../utils/admin/multer')
-
 const router = express.Router();
-const admin=require('../controller/admin/login')
 
+const admin=require('../controller/admin/login')
 router.get('/login',admin.login)
 router.post('/login',admin.loginVerification)
 router.get('/' ,admin.loadAdmin)

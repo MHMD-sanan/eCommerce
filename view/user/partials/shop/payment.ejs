@@ -1,0 +1,74 @@
+<%-include('../../layout/header.ejs')%>
+<div class="untree_co-section">
+  <div class="container">    
+    <div class="row">
+      <div class="col-md-6 mb-5 mb-md-0">
+        <h2 class="h3 mb-3">Shipping Details</h2>
+        <div class="p-3 p-lg-5 border bg-white">
+
+              <div class="card" style="width: 23rem;">
+                <div class="card-body">
+                  <h5 class="card-title">Muhammed Sanan</h5>
+                  <p class="card-text">Puthiyedath (H) nadero po kerala-673620-964503120</p>
+                </div>
+              </div>
+
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="row mb-5">
+          <div class="col-md-12">
+            <h2 class="h3 mb-3  ">Your Order</h2>
+            <div class="p-3 p-lg-5 border bg-white">
+              <table class="table site-block-order-table mb-5">
+                <thead>
+                  <th>Product</th>
+                  <th>Total</th>
+                </thead>
+                <tbody>
+                  <%if(cart!=null){%>
+                    <%for(let i=0;i<cart.items.length;i++){%>
+                      <%let eachItem=cart.items[i]%>
+                      <tr>
+                        <td><%=eachItem.productId.name%><strong class="mx-2">x</strong><%=eachItem.qty%></td>
+                        <td>$<%=eachItem.productId.price%></td>
+                      </tr>
+                    <%}%>
+                  <%}%>
+
+                  <tr>
+                    <td class="  font-weight-bold"><strong>Order Total</strong></td>
+                    <td class="  font-weight-bold"><strong>$<%=cart.totalPrice%></strong></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="border p-3 mb-5">
+                <form action="/placeOrder" method="post">
+
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" id="radio1" name="paymentMethode" value="COD" checked>COD
+                    <label class="form-check-label" for="radio1"></label>
+                  </div>
+
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" id="radio2" name="paymentMethode" value="razorpay">RazorPay
+                    <label class="form-check-label" for="radio2"></label>
+                  </div>
+
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-sm mt-3">Place Order</button>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </div>
+</div>
+
+<%-include('../../layout/footer.ejs')%>

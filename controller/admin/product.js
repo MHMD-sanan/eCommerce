@@ -27,7 +27,7 @@ const editProduct=async(req,res)=>{
         const product= await Product.findById({ _id: id });
         const categoryDetails=await Category.find();
         if (product) {
-                    res.render('../view/admi/editProduct.ejs', { product,category:categoryDetails});   
+            res.render('../view/admi/editProduct.ejs', { product,category:categoryDetails});   
         } else {
             res.redirect('/admin_panel/product');
         }

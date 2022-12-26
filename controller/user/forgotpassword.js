@@ -2,7 +2,7 @@ const User=require('../../model/user/userModel');
 const forgotMailer=require('../../utils/user/passwordOtp')
 
 const loadEmail=async(req,res)=>{
-    res.render('../view/user/forgotPassword/forgotPassword.ejs')
+    res.render('../view/user/partials/forgotPassword/forgotPassword.ejs')
 }
 
 let userData;
@@ -21,11 +21,11 @@ const sentOtp=async(req,res)=>{
                     console.log(err);
                 } else {
                     console.log("OTP mailed");
-                    res.render('../view/user/forgotPassword/otp.ejs')
+                    res.render('../view/user/partials/forgotPassword/otp.ejs')
                 }
             })
         }else{
-            res.render('../view/user/forgotPassword/forgotPassword.ejs',{error:"Email Not Found"})
+            res.render('../view/user/partials/forgotPassword/forgotPassword.ejs',{error:"Email Not Found"})
         }
     } catch (error) {
         console.log(error);
@@ -35,9 +35,9 @@ const sentOtp=async(req,res)=>{
 const otpVerification = async (req, res) => {
     try {
         if (req.body.otp == forgotMailer.OTP) {
-            res.render('../view/user/forgotPassword/newPassword.ejs')
+            res.render('../view/user/partials/forgotPassword/newPassword.ejs')
         } else {
-            res.render('../view/user/forgotPassword/otp.ejs', { error: "Invalid OTP" });
+            res.render('../view/user/partials/forgotPassword/otp.ejs', { error: "Invalid OTP" });
         }
     } catch (err) {
         console.log(err);

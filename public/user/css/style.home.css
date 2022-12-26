@@ -204,7 +204,7 @@ a {
     text-decoration: none;
     display: block;
     position: relative;
-    padding-bottom: 50px;
+    padding-bottom: 40px;
     cursor: pointer; }
     .product-section .product-item .product-thumbnail {
       margin-bottom: 30px;
@@ -505,7 +505,7 @@ a {
         background-color: #3b5d50; }
 
 .before-footer-section {
-  padding: 7rem 0 12rem 0 !important; }
+  padding: 1rem 0 12rem 0 !important; }
 
 .blog-section {
   padding: 7rem 0 12rem 0; }
@@ -621,7 +621,7 @@ a {
       font-size: 14px !important; }
 
 .untree_co-section {
-  padding: 7rem 0; }
+  padding: 1rem 0; }
 
 .form-control {
   height: 50px;
@@ -706,13 +706,21 @@ textarea {
     position: absolute;
     content: "";
     width: 50px;
-    height: 50px;
+    height: 50px; 
     border-radius: 50%;
     background: rgba(59, 93, 80, 0.2); }
 
 
 /* my css */
 
+
+.dropbtn {
+  background-color: #3b5d50;
+  color: white; 
+  font-size: 15px;
+  border: none;
+  border-radius: 5px;
+}
 
 .dropdown {
   position: relative;
@@ -736,10 +744,39 @@ textarea {
 }
 
 .dropdown-content a:hover {background-color: #ddd;}
+
 .dropdown:hover .dropdown-content {display: block;}
+
+/* .dropdown:hover .dropbtn {} */
+
+.op{
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
 
 /* MY CSS CODE */
 
-.sort{
-  color: red;
+/* .dropdown1 {
+  position: relative;
+  display: inline-block;
 }
+
+.dropbtn1 {
+  background-color: #3b5d50;
+  color: white; 
+  font-size: 15px;
+  border: none;
+}
+
+.dropdown1-content1 {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown1-content1 a:hover {background-color: #ddd;}
+
+.dropdown1:hover .dropdown1-content1 {display: block;} */

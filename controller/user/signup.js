@@ -2,7 +2,7 @@ const User = require('../../model/user/userModel');
 const mailer = require('../../utils/user/otp');
 
 const loadSignup = (req, res) => {
-    res.render('../view/user/signup.ejs')
+    res.render('../view/user/partials/login/signup.ejs')
 }
 
 const insertUser = async (req, res) => {
@@ -11,7 +11,7 @@ const insertUser = async (req, res) => {
         const email = req.body.email;
         const user = await User.findOne({ email: email });
         if (email === user.email) {
-            res.render('../view/user/signup.ejs', { error: "Email Already Exits" });
+            res.render('../view/user/partials/login/signup.ejs', { error: "Email Already Exits" });
         }
     } catch (error) {
 
@@ -25,7 +25,7 @@ const insertUser = async (req, res) => {
             if (err) {
                 console.log(err);
             } else {
-                res.render('../view/user/otp.ejs'); 
+                res.render('../view/user/partials/login/otp.ejs'); 
                 console.log("OTP mailed");
             }
         })

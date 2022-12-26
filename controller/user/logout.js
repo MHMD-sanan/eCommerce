@@ -1,12 +1,13 @@
-const logout = async (req, res) => {
-    try {
-        req.session.user_id = false;
-        res.redirect('/')
-    } catch (error) {
-        console.log(error);
-    }
-}
+exports.logout = async (req, res) => {
+  try {
+    req.session.user_id = false;
 
-module.exports = {
-    logout
-}
+    res.redirect("/");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// module.exports = {
+//     logout
+// }
