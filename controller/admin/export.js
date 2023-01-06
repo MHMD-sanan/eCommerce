@@ -52,7 +52,6 @@ exports.exportExcel=async(req,res)=>{
         {header:"Payment",key:'payment'},
         {header:"Items",key:'items'},
         {header:"Total",key:'total'},
-
     ];
     
     const salesData=await Order.find({status:"Delivered"}).populate('user');
