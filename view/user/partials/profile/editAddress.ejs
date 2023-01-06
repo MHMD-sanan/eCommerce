@@ -1,0 +1,58 @@
+<%-include('../../layout/header.ejs')%>
+<div class="untree_co-section">
+    <div class="container">
+      <div class="row" style="justify-content: center;">
+        <div class="col-md-6 mb-5 mb-md-0">
+          <div class="p-3 p-lg-5 border bg-white">
+            <form action="/updateAdd2" method="post">
+
+                <div class="form-group row">
+                  <div class="col-md-6">
+                    <label for="c_diff_lname" class="text">Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="name" value="<%=address.name%>">
+                  </div>
+                </div>
+
+                <div class="form-group row  mb-3">
+                  <div class="col-md-12">
+                    <label for="c_diff_address" class=" ">Address <span
+                        class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="home" value="<%=address.home%>">
+                  </div>
+                </div>
+
+                <div class="form-group row">
+                  <div class="col-md-6">
+                    <label for="c_diff_state_country" class=" ">State <span
+                        class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="state" value="<%=address.state%>">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="c_diff_postal_zip" class=" ">Posta / Zip <span
+                        class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="pincode" value="<%=address.pincode%>">
+                  </div>
+                </div>
+
+                <div class="form-group row mb-5">
+                  <div class="col-md-6">
+                    <label for="c_diff_email_address" class=" ">Email Address <span
+                        class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="email" value="<%=address.email%>">
+                  </div>
+                  <div class="col-md-6">
+                    <label for="c_diff_phone" class=" ">Phone <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="mobile_num" value="<%=address.mobile_num%>">
+                  </div>
+                </div>
+                <input type="hidden" name="addId" value="<%=address._id%>">
+
+                <button type="submit" class="btn btn-primary btn-sm py-3 btn-block">Update Address</button>
+        
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<%-include('../../layout/footer.ejs')%>

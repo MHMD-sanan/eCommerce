@@ -41,7 +41,7 @@ const updateProduct=async(req,res)=>{
         name:req.body.name,
         description:req.body.description,
         category:req.body.category,
-        image:req.file.filename,
+        // image:req.file.filename,
         price:req.body.price,
         quantity:req.body.quantity,
         color:req.body.color

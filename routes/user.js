@@ -27,55 +27,53 @@ router.get('/shop',shop.loadShop)
 const product=require('../controller/user/product')
 router.get('/product/:id',product.eachProduct)
 
-const cart=require('../controller/user/cart')
-router.get('/addToCart/:id',auth.isLogin,cart.addToCart)
+const cart=require('../controller/user/cart');
+router.get('/addToCart/:id',auth.isLogin,cart.addToCart);
+router.get('/incQty/:id',cart.incQty);
 router.get('/cart',auth.isLogin,cart.viewCart);
-router.post('/cart',auth.isLogin,cart.deleteCart)
-router.post('/decQty',cart.decQty)
+router.post('/cart',auth.isLogin,cart.deleteCart);
+router.post('/decQty',cart.decQty);
+
+const address=require('../controller/user/address');
+router.post('/saveAdd',address.saveAdd);
+router.post('/editAddress',address.editAddress);
+router.post('/updateAdd',address.updateAddress);
 
 const checkOut=require('../controller/user/checkout')
-router.get('/checkOut',checkOut.viewCheckOut)
-router.post('/saveAdd',checkOut.saveAdd);
-router.get('/payment/:id',checkOut.paymentPage);
+router.get('/checkOut',checkOut.viewCheckOut);
+router.post('/payment',checkOut.paymentPage);
 router.post('/placeOrder',checkOut.placeOrder);
+router.get('/payPalSuccess',checkOut.payPal);
+router.get('/error',checkOut.cancelPaypal);
+router.get('/success',checkOut.success);
+
+const coupon=require('../controller/user/coupon');
+router.post('/coupon',coupon.applyCoupon);
+
+const profile=require('../controller/user/profile');
+router.get('/profile',profile.viewProfile);
+router.post('/userUpdate',profile.userUpdate);
+router.get('/address',profile.address);
+router.post('/editAddress2',profile.editAddress2);
+router.post('/updateAdd2',profile.updateAddress2);
+router.post('/deleteAddress',profile.removeAddress);
+router.get('/orders',profile.orders);
+router.post('/cancelOrder',profile.cancelOrder);
+
+const wishlist=require('../controller/user/wishlist');
+router.post('/wishList',auth.isLogin,wishlist.addToWishlist);
+router.get('/wishlist',wishlist.viewWishList);
+router.post('/deleteFromWishlist',wishlist.deleteFromWishlist);
+router.post('/moveToCart',wishlist.moveToCart);
+
+// router.get('/create-checkout-session',(req,res)=>{
+//     res.render('test')
+// })
+const stripe=require('../controller/user/stripe');
+router.post('/create-checkout-session',stripe.payment);
+
+
 
 module.exports = router;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ***********   MY API FOR REDIRECTING TO HOME PAGE  *******************
-// let test= async function(String1,String2,String3,String4){
-//     const userData=await User.findOne({email:String2})
-//     if(userData){
-//         String1.render('../view/user/forgotPassword.ejs',{success:String3})
-//     }else{
-//         String1.render('../view/user/forgotPassword.ejs',{error:String4})
-//     }
-// }
-
-// router.post('/forgotPassword',async(req,res)=>{
-//     try {
-//         test(res,req.body.email,"ok",'error');
-//     } catch (error) {
-//         console.log(error);
-//     }
-// })

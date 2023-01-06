@@ -5,12 +5,20 @@ const orderSchema=new mongoose.Schema({
         type:mongoose.Types.ObjectId,
         ref:'User'
     },
-    products:[],
+    products:{},
     address:{
         type:mongoose.Types.ObjectId,
         ref:'User'
     },
-    payment:String
+    payment:String,
+    status:{
+        type:String,
+        default:"Placed"
+    },
+    date:{
+        type:Date,
+        default:Date.now
+    }
 
 });
 

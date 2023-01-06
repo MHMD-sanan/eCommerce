@@ -1,0 +1,61 @@
+<%-include('../../layout/header.ejs')%>
+    <section class="py-5 header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <!-- Tabs nav -->
+                    <div class="nav flex-column nav-pills nav-pills-custom">
+                        <a class="nav-link mb-3 p-3 shadow active">
+                            <span class="font-weight-bold small text-uppercase">Personal information</span>
+                        </a>
+                        <a class="nav-link mb-3 p-3 shadow" href="/address">
+                            <span class="font-weight-bold small text-uppercase">Addresses</span>
+                        </a>
+                        <a class="nav-link mb-3 p-3 shadow" href="/orders">
+                            <span class="font-weight-bold small text-uppercase">Orders</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-9">
+                    <!-- Tabs content -->
+                    <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade shadow rounded bg-white show active p-5" id="v-pills-home"
+                            role="tabpanel" aria-labelledby="v-pills-home-tab">
+                            <h4 class="font-italic mb-4">Personal information</h4>
+                            <form action="/userUpdate" method="post">
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label for="c_diff_lname" class="text">Name <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="name" value="<%=user.name%>">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row  mb-3">
+                                    <div class="col-md-6">
+                                        <label for="c_diff_address" class=" ">Email <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" name="email" value="<%=user.email%>">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label for="c_diff_state_country" class=" ">Password <span
+                                                class="text-danger">*</span></label>
+                                        <input type="password" class="form-control" name="password"
+                                            value="<%=user.password%>">
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary btn-sm py-3 btn-block mt-5">save Changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <%-include('../../layout/footer.ejs')%>

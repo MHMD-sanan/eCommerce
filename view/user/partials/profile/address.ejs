@@ -1,0 +1,143 @@
+<%-include('../../layout/header.ejs')%>
+<section class="py-5 header">
+  <div class="container">
+      <div class="row">
+          <div class="col-md-3">
+              <!-- Tabs nav -->
+                <div class="nav flex-column nav-pills nav-pills-custom" >
+                    <a class="nav-link mb-3 p-3 shadow" href="/profile">
+                      <span class="font-weight-bold small text-uppercase">Personal information</span>
+                    </a>
+
+                    <a class="nav-link mb-3 p-3 shadow active">
+                        <span class="font-weight-bold small text-uppercase">Addresses</span>
+                    </a>
+
+                    <a class="nav-link mb-3 p-3 shadow" href="/orders">
+                        <span class="font-weight-bold small text-uppercase">Orders</span>
+                    </a>
+                </div>
+          </div>
+
+          <div class="col-md-9">
+              <!-- Tabs content -->
+              <div class="tab-content" id="v-pills-tabContent">
+                  <div class="tab-pane fade shadow rounded bg-white show active p-5" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                    <h4 class="font-italic mb-4">My Address</h4>
+                    <%if(success.length!=0){%>
+                        <div class="alert alert-success" role="alert">
+                            <%=success%>
+                        </div>
+                    <%}%>
+                    
+                    <div >
+                        <%if(address==null || address.length==0){%>
+                            <p>No address added</p>
+                        <%}else{%>
+                                <%address.forEach((item)=>{%>
+                                    <%if(item.status==true){%>
+                                        <div class="card col-md-6">
+                                            <div class="card-body">
+                                                <form action="/deleteAddress" method="post">
+                                                    <input type="hidden" name="addId" value="<%=item.id%>">
+                                                    <button type="submit" class="float-end"style="border: 0;background-color: white;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                        </svg>
+                                                    </button>
+                                                </form>
+                                                <h5 class="card-title">
+                                                    <%=item.name%>
+                                                </h5>
+                                                <p class="card-text">
+                                                    <%=item.home%>,<%=item.state%>-<%=item.pincode%>
+                                                </p>
+                                                <p>
+                                                    <%=item.mobile_num%>
+                                                </p>
+                                                <form action="/editAddress2" method="post">
+                                                    <input type="hidden" name="addId" value="<%=item.id%>">
+                                                    <button type="submit"
+                                                        style="border: 0;background-color: white;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                                          </svg>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <br>
+                                    <%}%>
+                                <%})%>
+                            <%}%>
+                            <br>
+                            <div class="form-group">
+                                <label for="c_ship_different_address" class="text" data-bs-toggle="collapse"
+                                    href="#ship_different_address" role="button" aria-expanded="false"
+                                    aria-controls="ship_different_address"><b>Add new address </b>
+                                </label>
+                                <div class="collapse" id="ship_different_address">
+                                    <div class="py-2">
+                                        <form action="/saveAdd" method="post">
+
+                                            <div class="form-group row">
+                                                <div class="col-md-6">
+                                                    <label for="c_diff_lname" class="text">Name <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" name="name">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row  mb-3">
+                                                <div class="col-md-12">
+                                                    <label for="c_diff_address" class=" ">Address <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" name="home"
+                                                        placeholder="Street address">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row">
+                                                <div class="col-md-6">
+                                                    <label for="c_diff_state_country" class=" ">State <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" name="state">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="c_diff_postal_zip" class=" ">Posta / Zip <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" name="pincode">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group row mb-5">
+                                                <div class="col-md-6">
+                                                    <label for="c_diff_email_address" class=" ">Email Address <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" name="email">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="c_diff_phone" class=" ">Phone <span
+                                                            class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" name="mobile_num"
+                                                        placeholder="Phone Number">
+                                                </div>
+                                            </div>
+
+                                            <button type="submit" class="btn btn-primary btn-sm py-3 btn-block">Save
+                                                Address</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                  </div>                
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+<%-include('../../layout/footer.ejs')%>

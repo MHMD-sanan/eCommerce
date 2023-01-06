@@ -7,8 +7,10 @@ const coupenSchema=new mongoose.Schema({
         type:Boolean,
         default:true
     },
-    startDate:String,
-    endDate:String
+    startDate:Date,
+    endDate:Date,
+    maxQty:Number,
+    cap:Number
 })
 
 const Coupen=mongoose.model('Coupen',coupenSchema)

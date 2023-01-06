@@ -1,71 +1,11 @@
 <%-include('./layout/header.ejs')%>
 
-<style>
+  <!-- <style>
     * {
       box-sizing: border-box;
     }
-    .openBtn {
-      display: flex;
-      justify-content: right;
-    }
-    .openButton {
-      border: none;
-      border-radius: 5px;
-      background-color: #1c87c9;
-      color: white;
-      padding: 14px 20px;
-      cursor: pointer;
-    }
-    .loginPopup {
-      position: relative;
-      text-align: center;
-      width: 100%;
-    }
-    .formPopup {
-      display: none;
-      position: fixed;
-      left: 45%;
-      top: 5%;
-      transform: translate(-50%, 5%);
-      border: 3px solid #999999;
-      z-index: 9;
-    }
-    .formContainer {
-      max-width: 300px;
-      padding: 20px;
-      background-color: #fff;
-    }
-    .formContainer input[type=text],
-    .formContainer input[type=password] {
-      width: 100%;
-      padding: 15px;
-      margin: 5px 0 20px 0;
-      border: none;
-      background: #eee;
-    }
-    .formContainer input[type=text]:focus,
-    .formContainer input[type=password]:focus {
-      background-color: #ddd;
-      outline: none;
-    }
-    .formContainer .btn {
-      padding: 12px 20px;
-      border: none;
-      background-color: #8ebf42;
-      color: #fff;
-      cursor: pointer;
-      width: 100%;
-      margin-bottom: 15px;
-      opacity: 0.8;
-    }
-    .formContainer .cancel {
-      background-color: #cc0000;
-    }
-    .formContainer .btn:hover,
-    .openButton:hover {
-      opacity: 1;
-    }
-  </style>
+   
+  </style> -->
 
 
   <script>
@@ -75,64 +15,29 @@
     function closeForm() {
       document.getElementById("popupForm").style.display = "none";
     }
-
-
-    function openForm2() {
-      document.getElementById("popupForm2").style.display = "block";
-    }
-    function closeForm2() {
-      document.getElementById("popupForm2").style.display = "none";
-    }
   </script>
-
-
-<div class="container-fluid px-4">
+  <div class="container-fluid px-4">
     <div class="openBtn">
-        
-        <button class="openButton my-3 me-2" onclick="openForm()"><strong>Add category</strong></button>
+      <button class="openButton my-3 me-2" onclick="openForm()"><strong>Add category</strong></button>
+    </div>
+    <div class="loginPopup">
+      <div class="formPopup" id="popupForm">
+        <form action="/admin_panel/category" class="formContainer" method="post" enctype="multipart/form-data">
+          <label for="email">
+            <strong>Category Name</strong>
+          </label>
+          <input type="text" id="email" placeholder="category name" name="name" required>
+          <label for="psw">
+            <strong>Choose the image</strong>
+          </label>
+          <br><br>
+          <input type="file" name="image" accept="image/*" required>
+          <br><br>
+          <button type="submit" class="btn">Add</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
       </div>
-      <div class="loginPopup">
-        <div class="formPopup" id="popupForm">
-          <form action="/admin_panel/category" class="formContainer" method="post" enctype="multipart/form-data">
-            
-            <label for="email">
-              <strong>Category Name</strong>
-            </label>
-            <input type="text" id="email" placeholder="category name" name="name" required>
-            <label for="psw">
-              <strong>Choose the image</strong>
-            </label>
-            <br><br>
-            <input type="file" name="image" required>
-            <br><br>
-            <button type="submit" class="btn">Add</button>
-            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
-          </form>
-        </div>
-      </div>
-
-
-      <!-- edit form pop up -->
-
-      <div class="loginPopup">
-        <div class="formPopup" id="popupForm2">
-          <form action="/admin_panel/category" class="formContainer" method="post" enctype="multipart/form-data">
-            
-            <label for="email">
-              <strong>Category Nafhbdjfbme</strong>
-            </label>
-            <input type="text" id="email" placeholder="category name" name="name" required>
-            <label for="psw">
-              <strong>Choose the image</strong>
-            </label>
-            <br><br>
-            <input type="file" name="image" required>
-            <br><br>
-            <button type="submit" class="btn">Add</button>
-            <button type="button" class="btn cancel" onclick="closeForm2()">Close</button>
-          </form>
-        </div>
-      </div>
+    </div>
 
     <!-- <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a href="/admin_panel">Dashboard</a></li>
@@ -146,61 +51,51 @@
         </div>
     </div> -->
     <div class="card mb-4">
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            Category List
-        </div>
-        <div class="card-body">
-            <% if(details!=null) { %>
-            <table id="datatablesSimple">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Image</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                    </tr>
-                </tfoot>
-                <tbody>
-                    <% details.forEach(function(category){ %>
-                    <tr>
-                        <td><%=category.name%></td>
-                        <td><img src="/public/uploads/<%=category.image%>" alt="" width="200px" height="100px"></td>
-                        <td>
-                          <a class="btn btn-primary" href="/admin_panel/editCategory?id=<%=category._id%>" role="button">Edit</a>
-                          <% if(category.status==true) {%>
-                            <a class="btn btn-danger" href="/admin_panel/statusCategory?id=<%= category._id%>" role="button">Unlist</a>
-                          <%}else{%>
-                            <a class="btn btn-success" href="/admin_panel/statusCategory?id=<%= category._id%>" role="button">List</a>
-                            <%}%> 
-                        </td>
-                    </tr>   
-                    <% }) %>
-                </tbody>
-            </table>
-            <% } %>
-        </div>
+      <div class="card-header">
+        <i class="fas fa-table me-1"></i>
+        Category List
+      </div>
+      <div class="card-body">
+        <% if(details!=null) { %>
+          <table id="datatablesSimple">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              <% details.forEach(function(category){ %>
+                <tr>
+                  <td>
+                    <%=category.name%>
+                  </td>
+                  <td><img src="/public/uploads/<%=category.image%>" alt="" width="200px" height="100px"></td>
+                  <td>
+                    <a class="btn btn-primary" href="/admin_panel/editCategory?id=<%=category._id%>"
+                      role="button">Edit</a>
+                    <% if(category.status==true) {%>
+                      <a class="btn btn-danger" href="/admin_panel/statusCategory?id=<%= category._id%>"
+                        role="button">Unlist</a>
+                      <%}else{%>
+                        <a class="btn btn-success" href="/admin_panel/statusCategory?id=<%= category._id%>"
+                          role="button">List</a>
+                        <%}%>
+                  </td>
+                </tr>
+                <% }) %>
+            </tbody>
+          </table>
+          <% } %>
+      </div>
     </div>
-</div>
+  </div>
 
-<%-include('./layout/footer.ejs')%>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <%-include('./layout/footer.ejs')%>

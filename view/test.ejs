@@ -1,45 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
-
 <body>
-    <h1>fecth api testing</h1>
-    <form id="FormTesting" class="form">
-        <label for="name">Your Name</label>
-        <input type="text" name="name">
-        <br><br><br>
-        <label for="password">Your password</label>
-        <input type="text" name="password">
-        <input type="submit" value="SUBMIT">
-    </form>
-</body>
+  <form class="form">
 
-<script>
-    const myForm = document.getElementById('FormTesting')
-    myForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        const data = {
-            name: "muhammed sanan",
-            password: "ssdsd"
-        };
-        fetch('/test', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body:(this)
-        }).then(res=>{
-            console.log(res);
-        }).catch(err=>{
-            console.log(err);
-        })
+    <div class="form-check">
+      <input type="radio" class="form-check-input" id="radio1" name="paymentMethode" value="COD" checked>COD
+      <label class="form-check-label" for="radio1"></label>
+    </div>
+
+    <div class="form-check">
+      <input type="radio" class="form-check-input" id="radio2" name="paymentMethode" value="PayPal">PayPal
+      <label class="form-check-label" for="radio2"></label>
+    </div>
+
+    <div class="form-check">
+      <input type="radio" class="form-check-input" id="radio3" name="paymentMethode" value="Card">Card
+      <label class="form-check-label" for="radio3"></label>
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary btn-sm mt-3">Place Order</button>
+    </div>
+  </form>
+
+  <script>
+    const form=document.querySelector('.form');
+    form.addEventListener('submit',event=>{
+      event.preventDefault();
+      const formData=new FormData(form);
+      const payment=formData.get('paymentMethode');
+      console.log(payment);
+      fetch("http://localhost:3000/test", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body:JSON.stringify({
+      payment:payment
+    }),
+  })
+    .then(res => {
+      if (res.ok) return res.json()
+      return res.json().then(json => Promise.reject(json))
     })
-</script>
-
+    .then(({ url }) => {
+      window.location = url
+    })
+    .catch(e => {
+      console.error(e.error)
+    })
+    })
+  </script>
+</body>
 </html>
+
+
+
+
+
+

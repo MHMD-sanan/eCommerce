@@ -25,7 +25,10 @@ const insertUser = async (req, res) => {
             if (err) {
                 console.log(err);
             } else {
-                res.render('../view/user/partials/login/otp.ejs'); 
+                res.render('../view/user/partials/login/otp.ejs',{userData}); 
+                setTimeout(() => {
+                   mailer.OTP=false; 
+                },60000*3);
                 console.log("OTP mailed");
             }
         })
@@ -39,7 +42,7 @@ const otpVerification = async (req, res) => {
             user1.save();
             res.redirect('/user_login');
         } else {
-            res.render('../view/user/otp.ejs', { error: "Invalid OTP" });
+            res.render('../view/user/partials/login/otp.ejs', { error: "Invalid OTP" ,userData});
         }
     } catch (err) {
         console.log(err);

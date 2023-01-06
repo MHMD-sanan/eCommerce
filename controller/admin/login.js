@@ -17,9 +17,7 @@ const loginVerification=(req,res)=>{
     }
 }
 
-const loadAdmin=(req,res)=>{
-    res.render('../view/admi/dashboard.ejs')
-}
+
 
 const logout=(req,res)=>{
     req.session.adminEmail=false;
@@ -27,5 +25,5 @@ const logout=(req,res)=>{
 }
 
 module.exports={
-    login,loginVerification,loadAdmin,logout
+    login,loginVerification,logout
 }

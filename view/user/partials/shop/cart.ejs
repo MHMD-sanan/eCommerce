@@ -3,21 +3,20 @@
 <div class="untree_co-section before-footer-section">
   <%if(cart===null || cart.items.length==0){%>
     <h1 class=" d-flex justify-content-center">No items in Cart</h1>
-
   <%}else{%>
     <div class="container">
       <div class="row ">
         <!-- <form class="col-md-12" method="post"> -->
           <div class="site-blocks-table">
-
-              <table class="table ">
+          <h3>Cart</h3>
+              <table class="table">
                 <thead>
                   <tr>
-                    <th class="product-thumbnail">Image</th>
-                    <th class="product-name">Product</th>
-                    <th class="product-price">Price</th>
-                    <th class="product-quantity">Quantity</th>
-                    <th class="product-remove">Remove</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Remove</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -28,36 +27,30 @@
                         <img src="/public/uploads/<%=eachItem.productId.image%>" alt="Image" class="img-fluid">
                       </td>
                       <td class="product-name">
-                        <h2 class="h5 "><%=eachItem.productId.name%></h2>
+                        <h2 class="h5" style="font-size: 1.6vw;"><%=eachItem.productId.name%></h2>
                       </td>
-                      <td><%=eachItem.productId.price%></td>
+                      <td style="font-size: 1.6vw;">$<%=eachItem.productId.price%></td>
                       <td>
-                        <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
+                        <div class="input-group d-flex align-items-center quantity-container" style="max-width: 120px;">
                           <div class="input-group-prepend">                                     
-                              <form action="/decQty" method="post">
-                                <input type="hidden" name="id" value="<%=eachItem.productId._id%>">
-                                <button class="btn btn-outline-black decrease" type="submit">&minus;</button>
-                              </form>
-                          </div>
-                          <input type="text" class="form-control  center quantity-amount" value="<%=eachItem.qty%>" readonly placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                          <div class="input-group-append">
-                            <form action="/addToCart" method="post">
+                            <form action="/decQty" method="post">
                               <input type="hidden" name="id" value="<%=eachItem.productId._id%>">
-                              <button class="btn btn-outline-black increase" type="submit">&plus;</button>
+                              <button class="btn btn-outline-black decrease" type="submit">&minus;</button>
                             </form>
                           </div>
-
+                          <span class="form-control" style="font-size: 1.5vw;" id="qty"><%=eachItem.qty%></span>
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-black increase" onclick="incQty('<%=eachItem.productId._id%>') ">&plus;</button>
+                          </div>
                         </div>
                       </td>
                       <td>
                         <form action="" method="post">
                           <input type="hidden" name="proId" value="<%=eachItem.productId._id%>">
                           <input type="submit" value="X">
-                          <!-- btn btn-black btn-sm -->
                         </form>
                     </tr>
                   <%}%>
-        
                 </tbody>
               </table>
           </div>
@@ -67,9 +60,9 @@
       <div class="row">
         <div class="col-md-6">
           <div class="row mb-5">
-            <div class="col-md-6">
+            <!-- <div class="col-md-6">
               <a href="/shop"><button class="btn btn-primary btn-sm btn-block">Continue Shopping</button></a>
-            </div>
+            </div> -->
           </div>
         </div>
         <div class="col-md-6 pl-5">
@@ -90,10 +83,10 @@
               </div> -->
               <div class="row mb-5">
                 <div class="col-md-6">
-                  <span class="">Total</span>
+                  <span class="text-black">Total</span>
                 </div>
                 <div class="col-md-6 text-right">
-                  <strong class=""><%=cart.totalPrice%></strong>
+                  <strong class="text-black"><span id="totalPrice"><%=cart.totalPrice%></span></strong>
                 </div>
               </div>
 

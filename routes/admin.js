@@ -6,8 +6,10 @@ const router = express.Router();
 const admin=require('../controller/admin/login')
 router.get('/login',admin.login)
 router.post('/login',admin.loginVerification)
-router.get('/' ,admin.loadAdmin)
 router.get('/logout',admin.logout)
+
+const adminHome=require('../controller/admin/dashboard');
+router.get('/' ,adminHome.loadAdmin)
 
 const user=require('../controller/admin/user')
 router.get('/users',user.loadUser)
@@ -29,9 +31,20 @@ router.post('/editProduct', upload.single('image'), product.updateProduct);
 
 const coupen=require('../controller/admin/coupon')
 router.get('/coupen',  coupen.coupen);
-router.post('/coupen',coupen.insertCoupen)
+router.post('/coupen',coupen.insertCoupen);
 router.get('/editCoupen', coupen.editCoupen);
 router.post('/editCoupen',coupen.updateCoupen);
-router.get('/deleteCoupen',coupen.statusCoupen)
+router.get('/deleteCoupen',coupen.statusCoupen);
+
+const order=require('../controller/admin/order');
+router.get('/orders',order.viewOrders);
+router.post('/orderStatus',order.orderStatus);
+
+const sales=require('../controller/admin/sales');
+router.get('/sales',sales.viewSales);
+
+const report=require('../controller/admin/export');
+router.get('/exportPDF',report.exportPdf);
+router.get('/exportExcel',report.exportExcel);
 
 module.exports = router;

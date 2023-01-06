@@ -1,0 +1,38 @@
+<style>
+    table{
+        border-collapse: collapse;
+        width: 100%;   
+    }
+th,td{
+    border: 2px solid green; 
+    padding: 15px;
+}
+         
+</style>
+<table>
+    <h1 style="text-align: center;">Sales Report</h1>
+    <br><br>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Payment</th>
+            <th>Items</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%orders.forEach(function(order){ %>
+            <tr>
+                <%let date = order.date%>
+                <%let isoString = date.toISOString()%>
+                <%let newDate = isoString.split('T')[0]%>
+                <td><%=newDate%></td>
+                <td><%=order.user.name%></td>
+                <td><%=order.payment%></td>
+                <td><%=order.products.items.length%></td>
+                <td><%=order.products.totalPrice%></td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>

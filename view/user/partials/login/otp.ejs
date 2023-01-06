@@ -12,7 +12,6 @@
   <link rel="stylesheet" href="/public/user/css/style.css">
 
 </head>
-
 <body>
   <div class="d-lg-flex half">
     <div class="bg order-1 order-md-2" style="background-image: url('/public/user/images/bg_1.jpg');"></div>
@@ -28,15 +27,34 @@
               <%}%>
                 <form action="/otp" method="post">
                   <div class="form-group first">
-                    <label>OTP</label>
                     <input type="text" class="form-control" placeholder="Enter the otp" name="otp">
+                    <br>
                   </div>
                   <input type="submit" value="SUBMIT" class="btn btn-block btn-dark">
                 </form>
+                <br>
+                <form action="/user_signup" method="post">
+                  <input type="hidden" name="name" value="<%=userData.name%>">
+                  <input type="hidden" name="email" value="<%=userData.email%>">
+                  <input type="hidden" name="password" value="<%=userData.password%>">        
+                  <button type="submit" id="resendOtp" style="border: 0;">Resend otp</button>
+                </form> 
           </div>
         </div>
       </div>
     </div>
   </div>
 </body>
+<script>
+  function disable(){
+    document.getElementById("resendOtp").disabled=true;
+  }
+  disable();
+  function enable(){
+    document.getElementById("resendOtp").disabled=false;
+  }
+  setTimeout(()=>{
+    enable();
+  },5000*4)
+</script>
 </html>

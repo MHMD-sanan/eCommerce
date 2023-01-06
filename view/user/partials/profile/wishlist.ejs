@@ -1,0 +1,64 @@
+<%-include('../../layout/header.ejs')%>
+
+<div class="untree_co-section before-footer-section">
+  <%if(wishlist==null || wishlist.length==0){%>
+    <h1 class=" d-flex justify-content-center">No items in Wishlist</h1>
+  <%}else{%>
+    <div class="container">
+      <div class="row">
+          <div class="site-blocks-table">
+            <h1>Wishlist</h1>
+              <table class="table ">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%for(let i=0;i<wishlist.length;i++){%>
+                    <%let eachItem=wishlist[i]%>
+                    <tr>
+                      <td class="product-thumbnail">
+                        <img src="/public/uploads/<%=eachItem.productId.image%>" alt="Image" class="img-fluid">
+                      </td>
+                      <td class="product-name">
+                        <h2 style="font-size: 1.6vw;"><%=eachItem.productId.name%>.</h2>
+                      </td>
+                      <td style="font-size: 2vw;">$<%=eachItem.productId.price%></td>
+                      <td>
+                        <form action="/moveToCart" method="post">
+                          <input type="hidden" name="proId" value="<%=eachItem.productId._id%>">
+                          <button class="btn" style="font-size: 1.6vw;">Move To Cart</button>
+                        </form>
+                      </td>
+                      <td>
+                        <form action="/deleteFromWishlist" method="post">
+                          <input type="hidden" name="proId" value="<%=eachItem.productId._id%>">
+                          <input style="border: 0;" type="submit" value="X">
+                        </form>
+                      </td>
+                    </tr>
+                  <%}%>
+                </tbody>
+              </table>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="row mb-5">
+            <div class="col-md-6">
+              <a href="/shop"><button class="btn btn-primary btn-sm btn-block">Continue Shopping</button></a>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    <%}%>
+  </div>
+
+  <%-include('../../layout/footer.ejs')%>

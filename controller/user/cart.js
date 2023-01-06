@@ -1,14 +1,29 @@
 const User = require('../../model/user/userModel')
-const Product = require('../../model/admin/product')
-const addToCart = async (req, res) => {
+const Product = require('../../model/admin/product');
 
-    console.log('api called using ajax');
-    const isLogin = req.session.user_id;
-    const test=await User.findById(isLogin);
+const addToCart = async (req, res) => {
+    isLogin = req.session.user_id;
+    const user=await User.findById(isLogin);
     const product=await Product.findById(req.params.id);
-    test.addToCart(product)
+    user.addToCart(product)
     .then((data)=>{
         res.json({status:data.cart.items.length});
+    }).catch(err=>{
+        console.log(err);
+    })
+}
+
+const incQty = async (req, res) => {
+    const isLogin = req.session.user_id;
+    const user=await User.findById(isLogin);
+    const product=await Product.findById(req.params.id);
+    user.addToCart(product)
+    .then((data)=>{
+        res.json(
+            {
+                totalPrice:data.cart.totalPrice
+            }
+        );
     }).catch(err=>{
         console.log(err);
     })
@@ -48,7 +63,7 @@ const deleteCart=async(req,res)=>{
 }
 
 module.exports = {
-    addToCart, viewCart,deleteCart,decQty
+    addToCart, viewCart,deleteCart,decQty,incQty
 
 }
 

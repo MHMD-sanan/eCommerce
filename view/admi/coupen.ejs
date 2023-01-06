@@ -76,13 +76,6 @@
       document.getElementById("popupForm").style.display = "none";
     }
 
-
-    function openForm2() {
-      document.getElementById("popupForm2").style.display = "block";
-    }
-    function closeForm2() {
-      document.getElementById("popupForm2").style.display = "none";
-    }
   </script>
 
 
@@ -120,41 +113,6 @@
           </form>
         </div>
       </div>
-
-
-      <!-- edit form pop up -->
-
-      <div class="loginPopup">
-        <div class="formPopup" id="popupForm2">
-          <form action="/admin_panel/category" class="formContainer" method="post" enctype="multipart/form-data">
-            
-            <label for="email">
-              <strong>Category Nafhbdjfbme</strong>
-            </label>
-            <input type="text" id="email" placeholder="category name" name="name" required>
-            <label for="psw">
-              <strong>Choose the image</strong>
-            </label>
-            <br><br>
-            <input type="file" name="image" required>
-            <br><br>
-            <button type="submit" class="btn">Add</button>
-            <button type="button" class="btn cancel" onclick="closeForm2()">Close</button>
-          </form>
-        </div>
-      </div>
-
-    <!-- <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="/admin_panel">Dashboard</a></li>
-        <li class="breadcrumb-item active">Tables</li>
-    </ol> -->
-    <!-- <div class="card mb-4">
-        <div class="card-body">
-            DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
-            <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-            .
-        </div>
-    </div> -->
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
@@ -177,10 +135,19 @@
                     <tr>
                         <td style="text-transform:uppercase ;"><%=coupon.code%></td>
                         <td><%=coupon.discount%>%</td>
-                        <td><%=coupon.startDate%></td>
-                        <td><%=coupon.endDate%></td>
                         <td>
-                            
+                          <%let date = coupon.startDate%>
+                          <%let isoString = date.toISOString()%>
+                          <%let newDate = isoString.split('T')[0]%>
+                          <%=newDate%>
+                        </td>
+                        <td>
+                          <%let date1 = coupon.endDate%>
+                          <%let isoString1 = date1.toISOString()%>
+                          <%let newDate1 = isoString1.split('T')[0]%>
+                          <%=newDate1%>
+                        </td>
+                        <td>
                             <a class="btn btn-primary" href="/admin_panel/editCoupen?id=<%=coupon._id%>" role="button">Edit</a>
                             <% if(coupon.status==true) {%>
                               <a class="btn btn-danger" href="/admin_panel/deleteCoupen?id=<%= coupon._id%>" role="button">Unlist</a>
