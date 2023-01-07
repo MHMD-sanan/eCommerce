@@ -37,11 +37,17 @@ const editProduct=async(req,res)=>{
 }
 
 const updateProduct=async(req,res)=>{
+
+    const file=req.files.image;
+    let imagePath;
+    await cloudinary.uploader.upload(file.tempFilePath,{folder:"Products"},(error,result)=>{
+        imagePath=result.secure_url;
+    });
     await Product.findByIdAndUpdate({_id:req.query.id},{$set:{
         name:req.body.name,
         description:req.body.description,
         category:req.body.category,
-        // image:req.file.filename,
+        image:imagePath,
         price:req.body.price,
         quantity:req.body.quantity,
         color:req.body.color
@@ -49,17 +55,26 @@ const updateProduct=async(req,res)=>{
     res.redirect('/admin_panel/product');
 }
 
-const insertProduct=(req,res)=>{
+
+const cloudinary=require('../../utils/admin/cloudinary');
+const insertProduct=async(req,res)=>{
+
+    const file=req.files.image;
+    let imagePath;
+    await cloudinary.uploader.upload(file.tempFilePath,{folder:"Products"},(error,result)=>{
+        imagePath=result.secure_url;
+    });
+    
     try {
         let product= new Product({
             name:req.body.name,
             description:req.body.description,
             category:req.body.category,
-            image:req.file.filename,
+            image:imagePath,
             price:req.body.price,
             quantity:req.body.quantity,
             color:req.body.color
-        })
+        });
         product.save();
         res.redirect('/admin_panel/product');
 

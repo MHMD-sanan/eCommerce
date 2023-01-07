@@ -18,7 +18,6 @@ const insertCategory = (req, res) => {
     try {
         let category = new Category({
             name: req.body.name,
-            image: req.file.filename,
         })
         category.save();
         res.redirect('/admin_panel/category');
@@ -43,7 +42,7 @@ const editCategory = async (req, res) => {
 
 const updateCategory = async (req, res) => {
     try {
-        await Category.findByIdAndUpdate({ _id: req.query.id }, { $set: { name: req.body.name, image: req.file.filename } });
+        await Category.findByIdAndUpdate({ _id: req.query.id }, { $set: { name: req.body.name} });
         res.redirect('/admin_panel/category');
     } catch (error) {
         console.log(error.message);

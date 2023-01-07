@@ -1,6 +1,5 @@
 const express = require('express');
 const auth=require('../middleware/admin/autj')
-const upload = require('../utils/admin/multer')
 const router = express.Router();
 
 const admin=require('../controller/admin/login')
@@ -17,17 +16,17 @@ router.get('/updateUser',  user.updateUser);
 
 const category=require('../controller/admin/category')
 router.get('/category',  category.category);
-router.post('/category', upload.single('image'), category.insertCategory);
+router.post('/category', category.insertCategory);
 router.get('/editCategory',  category.editCategory);
-router.post('/editCategory', upload.single('image'), category.updateCategory);
+router.post('/editCategory', category.updateCategory);
 router.get('/statusCategory',  category.statusCategory)
 
 const product=require('../controller/admin/product')
 router.get('/product',  product.product);
-router.post('/product', upload.single('image'), product.insertProduct);
+router.post('/product', product.insertProduct);
 router.get('/statusProduct',  product.statusProduct);
 router.get('/editProduct',  product.editProduct)
-router.post('/editProduct', upload.single('image'), product.updateProduct);
+router.post('/editProduct', product.updateProduct);
 
 const coupen=require('../controller/admin/coupon')
 router.get('/coupen',  coupen.coupen);
@@ -39,9 +38,7 @@ router.get('/deleteCoupen',coupen.statusCoupen);
 const order=require('../controller/admin/order');
 router.get('/orders',order.viewOrders);
 router.post('/orderStatus',order.orderStatus);
-
-const sales=require('../controller/admin/sales');
-router.get('/sales',sales.viewSales);
+router.get('/sales',order.viewSales);
 
 const report=require('../controller/admin/export');
 router.get('/exportPDF',report.exportPdf);

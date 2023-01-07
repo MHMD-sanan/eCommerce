@@ -27,11 +27,6 @@
             <strong>Category Name</strong>
           </label>
           <input type="text" id="email" placeholder="category name" name="name" required>
-          <label for="psw">
-            <strong>Choose the image</strong>
-          </label>
-          <br><br>
-          <input type="file" name="image" accept="image/*" required>
           <br><br>
           <button type="submit" class="btn">Add</button>
           <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
@@ -61,7 +56,6 @@
             <thead>
               <tr>
                 <th>Name</th>
-                <th>Image</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -77,7 +71,6 @@
                   <td>
                     <%=category.name%>
                   </td>
-                  <td><img src="/public/uploads/<%=category.image%>" alt="" width="200px" height="100px"></td>
                   <td>
                     <a class="btn btn-primary" href="/admin_panel/editCategory?id=<%=category._id%>"
                       role="button">Edit</a>

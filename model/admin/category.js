@@ -2,7 +2,6 @@ const mongoose=require('mongoose');
 
 const categorySchema=new mongoose.Schema({
     name:String,
-    image:String,
     status:{
         type:Boolean,
         default:true

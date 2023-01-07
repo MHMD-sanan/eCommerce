@@ -67,7 +67,6 @@ const userSchema = new mongoose.Schema({
 
 
 userSchema.methods.addToCart = function (product) {
-
   let cart = this.cart;
   const isExisting = cart.items.findIndex(objInItems => new String(objInItems.productId).trim() === new String(product._id).trim());
   if (isExisting >= 0) {
