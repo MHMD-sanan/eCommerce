@@ -107,11 +107,16 @@ userSchema.methods.applyCoupon=async function (isLogin,code){
   }else{
     const currentDate=new Date();
     if(currentDate>=data[0].startDate && currentDate<=data[0].endDate){
-      const value=data[0].discount;
-      const discount=(cart.totalPrice/100)*value;
-      coupon.push({couponId:data[0]._id});
-      cart.coupon=discount;
-      return this.save();
+      if(cart.totalPrice<data[0].minAmount){
+        let msg='min';
+        return msg;
+      }else{
+        const value=data[0].discount;
+        const discount=(cart.totalPrice/100)*value;
+        coupon.push({couponId:data[0]._id});
+        cart.coupon=discount;
+        return this.save();
+      }
     }else{
       let msg='expired';
       return msg;

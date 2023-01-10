@@ -44,7 +44,8 @@ const updateCoupen=async(req,res)=>{
             code:req.body.code,
             discount:req.body.discount,
             startDate:req.body.startDate,
-            endDate:req.body.endDate
+            endDate:req.body.endDate,
+            minAmount:req.body.minAmount
         }});
         res.redirect('/admin_panel/coupen')
     } catch (error) {

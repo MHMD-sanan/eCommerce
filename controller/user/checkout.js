@@ -21,8 +21,7 @@ exports.paymentPage = async (req, res) => {
         mobile_num:req.body.mobile_num
     }
     try {
-        addressId = req.body.addressId;
-        totalPrice=req.body.totalPrice;
+        addressId = req.body.addressId;talPrice=req.body.totalPrice;
         data = await user.populate("cart.items.productId");
         res.render('../view/user/partials/shop/payment.ejs', { isLogin, cart: data.cart, address:address});
     } catch (error) {

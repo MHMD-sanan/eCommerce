@@ -15,6 +15,8 @@ exports.applyCoupon=async(req,res)=>{
             }else if(replay=='expired'){
                 req.flash('error','Coupon expired');
                 console.log('coupon expired');
+            }else if(replay=='min'){
+                req.flash('error','You should shope for more to apply this coupon');
             }else{
                 req.flash('success',"Coupon applied successfully");
                 console.log('coupon applied');
