@@ -51,7 +51,7 @@ exports.paymentPage = async (req, res) => {
 //         await User.findByIdAndUpdate(isLogin, { $unset: { cart: "" }});
 //         if (req.body.paymentMethode == 'COD') {
 //             const data = await user.populate("cart.items.productId");
-//             res.redirect('/success');
+//             res.redirect('/success');git 
 //         }else if(req.body.paymentMethode== 'Razorpay'){
             
 //         }
