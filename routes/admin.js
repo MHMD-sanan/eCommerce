@@ -2,46 +2,46 @@ const express = require('express');
 const auth=require('../middleware/admin/autj')
 const router = express.Router();
 
-const admin=require('../controller/admin/login')
-router.get('/login',admin.login)
-router.post('/login',admin.loginVerification)
-router.get('/logout',admin.logout)
+const admin=require('../controller/admin/login');
+router.get('/login',auth.isLogout,admin.login);
+router.post('/login',auth.isLogout,admin.loginVerification);
+router.get('/logout',admin.logout);
 
 const adminHome=require('../controller/admin/dashboard');
-router.get('/' ,adminHome.loadAdmin)
+router.get('/',auth.isLogin,adminHome.loadAdmin);
 
-const user=require('../controller/admin/user')
-router.get('/users',user.loadUser)
-router.get('/updateUser',  user.updateUser);
+const user=require('../controller/admin/user');
+router.get('/users',auth.isLogin,user.loadUser);
+router.get('/updateUser',auth.isLogin,user.updateUser);
 
-const category=require('../controller/admin/category')
-router.get('/category',  category.category);
-router.post('/category', category.insertCategory);
-router.get('/editCategory',  category.editCategory);
-router.post('/editCategory', category.updateCategory);
-router.get('/statusCategory',  category.statusCategory)
+const category=require('../controller/admin/category');
+router.get('/category',auth.isLogin,category.category);
+router.post('/category',auth.isLogin,category.insertCategory);
+router.get('/editCategory',auth.isLogin,category.editCategory);
+router.post('/editCategory',auth.isLogin,category.updateCategory);
+router.get('/statusCategory',auth.isLogin,category.statusCategory);
 
-const product=require('../controller/admin/product')
-router.get('/product',  product.product);
-router.post('/product', product.insertProduct);
-router.get('/statusProduct',  product.statusProduct);
-router.get('/editProduct',  product.editProduct)
-router.post('/editProduct', product.updateProduct);
+const product=require('../controller/admin/product');
+router.get('/product',auth.isLogin,product.product);
+router.post('/product',auth.isLogin,product.insertProduct);
+router.get('/statusProduct',auth.isLogin,product.statusProduct);
+router.get('/editProduct',auth.isLogin,product.editProduct);
+router.post('/editProduct',auth.isLogin,product.updateProduct);
 
-const coupen=require('../controller/admin/coupon')
-router.get('/coupen',  coupen.coupen);
-router.post('/coupen',coupen.insertCoupen);
-router.get('/editCoupen', coupen.editCoupen);
-router.post('/editCoupen',coupen.updateCoupen);
-router.get('/deleteCoupen',coupen.statusCoupen);
+const coupen=require('../controller/admin/coupon');
+router.get('/coupen',auth.isLogin,coupen.coupen);
+router.post('/coupen',auth.isLogin,coupen.insertCoupen);
+router.get('/editCoupen',auth.isLogin,coupen.editCoupen);
+router.post('/editCoupen',auth.isLogin,coupen.updateCoupen);
+router.get('/deleteCoupen',auth.isLogin,coupen.statusCoupen);
 
 const order=require('../controller/admin/order');
-router.get('/orders',order.viewOrders);
-router.post('/orderStatus',order.orderStatus);
-router.get('/sales',order.viewSales);
+router.get('/orders',auth.isLogin,order.viewOrders);
+router.post('/orderStatus',auth.isLogin,order.orderStatus);
+router.get('/sales',auth.isLogin,order.viewSales);
 
 const report=require('../controller/admin/export');
-router.get('/exportPDF',report.exportPdf);
-router.get('/exportExcel',report.exportExcel);
+router.get('/exportPDF',auth.isLogin,report.exportPdf);
+router.get('/exportExcel',auth.isLogin,report.exportExcel);
 
 module.exports = router;

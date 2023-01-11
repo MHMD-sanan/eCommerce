@@ -1,29 +1,34 @@
 <%-include('../../layout/header.ejs')%>
 
 <div class="untree_co-section product-section ">
-
-
 	<div class="container">
 		<div class="row">
-
-			<!-- <div class="col-3">
-				<p>sjbjjvhvv </p>
+			
+			<!-- <div class="btn-group dropright">
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  Dropleft
+				</button>
+				<div class="dropdown-menu">
+				  <a class="dropdown-item" href="">ssff</a>
+				  <a class="dropdown-item" href="">ssff</a>
+					<a class="dropdown-item" href="">ssff</a>
+				</div>
 			</div> -->
-	
+			
 			<div>
 				<div class="op">
 					<div class="dropdown" style="float: right;">
 						<button class="dropbtn" >Sort</button>
 						<div class="dropdown-content">
-							<a href="?sort=">Relevence</a>
+							<a  href="?sort=">Relevence</a>
 							<a href="?sort=asort">High to low</a>
 							<a href="?sort=dsort">Low to high</a>
 						</div>
 					</div>
-			
+
 					<div class="dropdown" style="float:left;">
 						<button class="dropbtn" >Filter</button>
-						<div class="dropdown-content">
+						<div class="dropdown-content" >
 							<a href="?category=">All Products</a>
 							<% if(category!=null){%>
 								<% category.forEach((category)=>{%>
@@ -34,7 +39,7 @@
 					</div>
 		
 						<form class="d-flex justify-content-center">
-							<input type="text"  placeholder="search product" name="search" style="border:0 ;border-radius: 5px;">
+							<input type="text"  placeholder="search product" class="w-25 me-2" name="search" style="border:0 ;border-radius: 5px;">
 							<input class="dropbtn" type="submit" value="Search">
 						</form>
 				</div>
@@ -50,9 +55,6 @@
 										<img src="<%=product.image%>" class="img-fluid product-thumbnail">
 										<h3 class="product-title"><%=product.name%></h3>
 										<strong class="product-price">$<%=product.price%>.00</strong>
-										<!-- <span class="icon-cross">
-											<img src="/public/user/images/cross.svg" class="img-fluid">
-										</span> -->
 									</a>
 								</div>		
 							<%}%>
@@ -81,7 +83,7 @@
 								</li>
 							<%}%>
 						</ul>
-					  </nav>
+					</nav>
 				</div>	
 			</div>
 		</div>

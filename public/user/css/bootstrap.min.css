@@ -678,11 +678,11 @@ progress {
     margin-left: auto
 }
 
-@media (min-width:390px) {
+@media (min-width:375px) {
 
     .container,
     .container-sm {
-        max-width: 365px;
+        max-width: 350px;
     }
 }
 

@@ -20,31 +20,26 @@
             <div class="card-body p-5 text-center">
             <form action="/user_signup" method="post">
               <div class="mb-md-5 mt-md-4 pb-5">
-                <%if(locals.wrong){%>
+                <%if(locals.error){%>
                   <div class="alert alert-danger" role="alert">
-                    <%=locals.wrong%>
-                  </div>
-                <%}%>
-                <%if(locals.success){%>
-                  <div class="alert alert-success" role="alert">
-                    <%=locals.success%>
+                    <%=error%>
                   </div>
                 <%}%>
                 <h2 class="fw-bold mb-2 text-uppercase">Signup</h2>
                 <p class="text-white-50 mb-5">Please enter your username ,email and password!</p>
 
                 <div class="form-outline form-white mb-4">
-                  <input type="text" name="name" class="form-control form-control-lg" />
+                  <input type="text" name="name" placeholder="Enter Your Username" class="form-control form-control-lg" />
                   <label class="form-label">Username</label>
                 </div>
                   
                 <div class="form-outline form-white mb-4">
-                  <input type="email" name="email" class="form-control form-control-lg" />
+                  <input type="email" name="email" placeholder="Enter Your Email" class="form-control form-control-lg" />
                   <label class="form-label" for="typeEmailX">Email</label>
                 </div>
   
                 <div class="form-outline form-white mb-4">
-                  <input type="password" name="password" class="form-control form-control-lg" />
+                  <input type="password" name="password" placeholder="Enter Your Password" class="form-control form-control-lg" />
                   <label class="form-label" >Password</label>
                 </div>
   
@@ -64,11 +59,5 @@
       </div>
     </div>
   </section>
-
-  <script>
-    if ( window.history.replaceState ) {
-    window.history.replaceState( null, null, window.location.href );
-    }
-    </script>
   </body>
 </html>
