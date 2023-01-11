@@ -42,10 +42,11 @@ router.post('/updateAdd',auth.isLogin,address.updateAddress);
 const checkOut=require('../controller/user/checkout')
 router.get('/checkOut',auth.isLogin,checkOut.viewCheckOut);
 router.post('/payment',auth.isLogin,checkOut.paymentPage);
-router.post('/placeOrder',auth.isLogin,checkOut.placeOrder);
-router.get('/payPalSuccess',auth.isLogin,checkOut.payPal);
+// router.post('/placeOrder',auth.isLogin,checkOut.placeOrder);
+// router.get('/payPalSuccess',auth.isLogin,checkOut.payPal);
 router.get('/error',auth.isLogin,checkOut.cancelPaypal);
 router.get('/success',auth.isLogin,checkOut.success);
+router.post('/create-checkout-session',checkOut.payment);
 
 const coupon=require('../controller/user/coupon');
 router.post('/coupon',auth.isLogin,coupon.applyCoupon);
@@ -66,11 +67,11 @@ router.get('/wishlist',auth.isLogin,wishlist.viewWishList);
 router.post('/deleteFromWishlist',auth.isLogin,wishlist.deleteFromWishlist);
 router.post('/moveToCart',auth.isLogin,wishlist.moveToCart);
 
-router.get('/create-checkout-session',(req,res)=>{
-    res.send('test');
-})
-const stripe=require('../controller/user/stripe');
-router.post('/create-checkout-session',stripe.payment);
+// router.get('/create-checkout-session',(req,res)=>{
+//     res.send('test');
+// })
+// const stripe=require('../controller/user/stripe');
+// router.post('/create-checkout-session',stripe.payment);
 
 module.exports = router;
 

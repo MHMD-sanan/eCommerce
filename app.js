@@ -28,24 +28,12 @@ app.use(fileupload({
 
 // TESTING PURPOSE
 
-app.get('/test',(req,res)=>{
-    res.render('test');
-})
-app.post('/test',async(req,res)=>{
-
-})
-
-// app.use(async(req,res,next)=>{
-//     req.session.user_id="63a96d25fa3a241fa7161baf"
-//     next()
-// })
 //TESTING PURPOSE
 
 const adminRouter = require('./routes/admin');
 app.use('/admin_panel', adminRouter);
 
 const userRouter = require('./routes/user');
-const { Result } = require('express-validator');
 app.use('/', userRouter);
 
 app.listen(process.env.PORT, (req, res) => {
