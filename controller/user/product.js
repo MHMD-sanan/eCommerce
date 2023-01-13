@@ -6,6 +6,8 @@ const eachProduct = async (req, res) => {
     try {
         const isLogin=req.session.user_id;
         const cart=await User.findById(req.session.user_id);
+        const isExisting = cart.cart.items.findIndex(objInItems => new String(objInItems.productId).trim() === new String(req.params.id).trim());
+        // console.log(isExisting);
         if(cart.length!=0 || cart!=null){
             res.render('../view/user/partials/shop/product.ejs', { product,isLogin,cart:cart.cart,error:req.flash('error'),success:req.flash('success') })
         }else{

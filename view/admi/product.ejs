@@ -1,73 +1,5 @@
 <%-include('./layout/header.ejs')%>
 
-<style>
-    * {
-      box-sizing: border-box;
-    }
-    .openBtn {
-      display: flex;
-      justify-content: right;
-    }
-    .openButton {
-      border: none;
-      border-radius: 5px;
-      background-color: #1c87c9;
-      color: white;
-      padding: 14px 20px;
-      cursor: pointer;
-    }
-    .loginPopup {
-      position: relative;
-      text-align: center;
-      width: 100%;
-    }
-    .formPopup {
-      display: none;
-      position: fixed;
-      left: 45%;
-      top: 5%;
-      transform: translate(-50%, 5%);
-      border: 3px solid #999999;
-      z-index: 9;
-    }
-    .formContainer {
-      max-width: 300px;
-      padding: 20px;
-      background-color: #fff;
-    }
-    .formContainer input[type=text],
-    .formContainer input[type=password] {
-      width: 100%;
-      padding: 15px;
-      margin: 5px 0 20px 0;
-      border: none;
-      background: #eee;
-    }
-    .formContainer input[type=text]:focus,
-    .formContainer input[type=password]:focus {
-      background-color: #ddd;
-      outline: none;
-    }
-    .formContainer .btn {
-      padding: 12px 20px;
-      border: none;
-      background-color: #8ebf42;
-      color: #fff;
-      cursor: pointer;
-      width: 100%;
-      margin-bottom: 15px;
-      opacity: 0.8;
-    }
-    .formContainer .cancel {
-      background-color: #cc0000;
-    }
-    .formContainer .btn:hover,
-    .openButton:hover {
-      opacity: 1;
-    }
-  </style>
-
-
   <script>
     function openForm() {
       document.getElementById("popupForm").style.display = "block";
@@ -77,13 +9,11 @@
     }
 
   </script>
-
-
 <div class="container-fluid px-4">
     <div class="openBtn">
         
         <button class="openButton my-3 me-2" onclick="openForm()"><strong>Add product</strong></button>
-      </div>
+    </div>
       <div class="loginPopup">
         <div class="formPopup" id="popupForm">
           <form action="/admin_panel/product" class="formContainer" method="post" enctype="multipart/form-data">
@@ -128,29 +58,14 @@
         </div>
       </div>
 
-
-      <!-- edit form pop up -->
-
-    <!-- <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="/admin_panel">Dashboard</a></li>
-        <li class="breadcrumb-item active">Tables</li>
-    </ol> -->
-    <!-- <div class="card mb-4">
-        <div class="card-body">
-            DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the
-            <a target="_blank" href="https://datatables.net/">official DataTables documentation</a>
-            .
-        </div>
-    </div> -->
-
-    <div class="card mb-4">
+    <div class="card">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
             Product List
         </div>
         <div class="card-body">
             <% if(details!=null) { %>
-            <table id="datatablesSimple">
+            <table id="example" class="display">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -187,7 +102,6 @@
         </div>
     </div>
 </div>
-
 <%-include('./layout/footer.ejs')%>
 
 

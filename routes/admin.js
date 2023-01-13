@@ -41,7 +41,6 @@ router.post('/orderStatus',auth.isLogin,order.orderStatus);
 router.get('/sales',auth.isLogin,order.viewSales);
 
 const report=require('../controller/admin/export');
-router.get('/exportPDF',auth.isLogin,report.exportPdf);
-router.get('/exportExcel',auth.isLogin,report.exportExcel);
+router.post('/downloadSalesReport',auth.isLogin,report.exportsales);
 
 module.exports = router;

@@ -27,7 +27,14 @@ app.use(fileupload({
 
 
 // TESTING PURPOSE
-
+app.get('/test',(req,res)=>{
+    res.render('test.ejs');
+});
+app.post('/test',(req,res)=>{
+    res.json({
+        message:"Server Sent Hello"
+    });
+});
 //TESTING PURPOSE
 
 const adminRouter = require('./routes/admin');

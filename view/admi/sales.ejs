@@ -1,19 +1,29 @@
 <%-include('./layout/header.ejs')%>
-
 <div class="container">
-    <div class="my-3 d-flex justify-content-end me-5">
-        <p>Dowload Sales Report:-</p>
-        <a href="/admin_panel/exportPDF"><i class="fa fa-file-pdf ms-2"></i></a>
-        <a href="/admin_panel/exportExcel"><i class="fa fa-file-excel ms-3 me-5"></i></a>
+    <div class="d-flex justify-content-end me-4 mt-3">
+        <form action="/admin_panel/downloadSalesReport" method="post" class="m-3">
+            <label for="">From</label>
+            <input type="date" name="from" required>
+            <label for="">To</label>
+            <input type="date" name="to" required>
+            <label for="">format</label>
+            <select name="format" id="">
+                <option value="pdf">Pdf</option>
+                <option value="excel">Excel</option>
+            </select>
+            <input type="submit" value="Dowload">
+        </form>
+        <!-- <a href="/admin_panel/exportPDF"><i class="fa fa-file-pdf ms-2"></i></a>
+        <a href="/admin_panel/exportExcel"><i class="fa fa-file-excel ms-2"></i></a> -->
     </div>
     <div class="card">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
-            Orders List
+            Sale
         </div>
         <div class="card-body">
             <% if(orders!=null) { %>
-            <table id="datatablesSimple">
+            <table id="example" class="display">
                 <thead>
                     <tr>
                         <th>Date</th>

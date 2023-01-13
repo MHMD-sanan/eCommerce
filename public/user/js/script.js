@@ -6,6 +6,7 @@ function addToCart(proId){
             let count=$('#cart-count').html();
             count=res.status; 
             $('#cart-count').html(count);
+            $("#test").load(location.href + " #test>*", "");
         }
     })
 }

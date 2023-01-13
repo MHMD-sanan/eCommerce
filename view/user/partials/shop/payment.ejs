@@ -123,15 +123,15 @@
       }else{
         var options = {
     "key": "rzp_test_2xERoSusyd4f84", // Enter the Key ID generated from the Dashboard
-    "amount": orderData.amount*100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "amount": orderData.amount*100,
     "currency": "INR",
     "name": "Acme Corp",
-    "order_id": orderData.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "order_id": orderData.id,
     "handler": function (response){
         // alert(response.razorpay_payment_id);
         // alert(response.razorpay_order_id);
         // alert(response.razorpay_signature);
-        location.href=location.href=orderData.url
+        location.href=orderData.url
         },
       };
     var rzp1 = new Razorpay(options);

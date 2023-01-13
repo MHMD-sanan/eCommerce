@@ -45,8 +45,17 @@
                                 </div>
                                 <p><b>Overview</b></p>
                                 <p class="about"><%=product.description%>.</p>
-                                <div class="cart mt-4 align-items-center">
-                                    <div class="cart mt-4 align-items-center"> <button class="btn btn-primary btn-sm text-uppercase mr-2 px-4" onclick="addToCart('<%=product._id%>') " >Add to cart</button></i> </div>
+                                <%const isExisting = cart.items.findIndex(objInItems => new String(objInItems.productId).trim() === new String(product._id).trim())%>
+                                <div id="test">
+                                    <%if(isExisting==-1){%>
+                                        <div class="cart mt-4 align-items-center">
+                                            <div class="cart mt-4 align-items-center"> <button class="btn btn-primary btn-sm text-uppercase mr-2 px-4" onclick="addToCart('<%=product._id%>') " >Add to cart</button></i> </div>
+                                        </div>
+                                    <%}else{%>
+                                        <div class="cart mt-4 align-items-center">
+                                            <div class="cart mt-4 align-items-center"> <a  href="/cart" class="btn btn-primary btn-sm text-uppercase mr-2 px-4">Go to cart</a></i> </div>
+                                        </div>
+                                    <%}%>
                                 </div>
                             </div>
                         </div>
