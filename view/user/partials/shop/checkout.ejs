@@ -1,179 +1,177 @@
 <%-include('../../layout/header.ejs')%>
-  <div class="untree_co-section">
     <div class="container">
       <div class="row">
-        <div class="col-md-6 mb-5 mb-md-0">
-          <h2 class="h3 mb-3  ">Shipping Details</h2>
-            <%if(address==null || address.length==0){%>
-              <p>No address added</p>
-              <%}else{%>
-                <%address.forEach((item)=>{%>
-                  <%if(item.status==true){%>
-                    <div class="card" style="width: 23rem;">
-                      <div class="card-body">
-                        <form action="/editAddress" method="post">
-                          <input type="hidden" name="addId" value="<%=item.id%>">
-                          <button type="submit" class="float-end"style="border: 0;background-color: white;">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                              <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                              <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                            </svg>
-                          </button>
-                        </form>
-                        <h5 class="card-title">
-                          <%=item.name%>
-                        </h5>
-                        <p class="card-text">
-                          <%=item.home%>,<%=item.state%>-<%=item.pincode%>
-                        </p>
-                        <p>
-                          <%=item.mobile_num%>
-                        </p>
-                        <form action="/payment" method="post">
-                          <input type="hidden" value="<%=item.id%>" name="addressId">
-                          <input type="hidden" value="<%=cart.totalPrice-cart.coupon%>" name="totalPrice">
-                          <input type="hidden" value="<%=item.name%>" name="name">
-                          <input type="hidden" value="<%=item.home%>" name="home">
-                          <input type="hidden" value="<%=item.state%>" name="state">
-                          <input type="hidden" value="<%=item.pincode%>" name="pincode">
-                          <input type="hidden" value="<%=item.mobile_num%>" name="mobile_num">
-                          <button type="submit" class="btn btn-primary btn-sm">Deliver Here</button>
-                        </form>
-                      </div>
-                    </div>
-                  <%}%>
-                  <br>
-                <%})%>
-              <%}%>
-                      <br>
-                      <div class="form-group">
-                        <label for="c_ship_different_address" class="text" data-bs-toggle="collapse"
-                          href="#ship_different_address" role="button" aria-expanded="false"
-                          aria-controls="ship_different_address"><b>Add new address </b></label>
-                        <div class="collapse" id="ship_different_address">
-                          <div class="py-2">
-                            <form action="/saveAdd" method="post">
+        <div class="col-md-6">     
+          <div class="row mb-5">
+          <div class="col-md-12">
+            <h2 class="h3 my-3">Coupon Code</h2>
+            <div class="p-3 p-lg-5 border bg-white">
+              <%if(error.length!=0){%>
+                <div class="alert alert-danger" role="alert">
+                    <%=error%>
+                </div>
+            <%}%>
+            <%if(success.length!=0){%>
+              <div class="alert alert-success" role="alert">
+                  <%=success%>
+              </div>
+            <%}%>
+              <label for="c_code" class=" mb-3">Enter your coupon code if you have one</label>
+              <form action="/coupon" method="post">
+                <div class="input-group w-75 couponcode-wrap">
+                  <input type="text" class="form-control me-2" name="coupon" style="text-transform: uppercase;" placeholder="Coupon Code"
+                    aria-label="Coupon Code" aria-describedby="button-addon2">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary btn-sm" type="submit">Apply</button>
+                  </div>
+                </div>
+              </form>
 
-                              <div class="form-group row">
-                                <div class="col-md-6">
-                                  <label for="c_diff_lname" class="text">Name <span class="text-danger">*</span></label>
-                                  <input type="text" class="form-control" name="name">
-                                </div>
-                              </div>
-
-                              <div class="form-group row  mb-3">
-                                <div class="col-md-12">
-                                  <label for="c_diff_address" class=" ">Address <span
-                                      class="text-danger">*</span></label>
-                                  <input type="text" class="form-control" name="home" placeholder="Street address">
-                                </div>
-                              </div>
-
-                              <div class="form-group row">
-                                <div class="col-md-6">
-                                  <label for="c_diff_state_country" class=" ">State <span
-                                      class="text-danger">*</span></label>
-                                  <input type="text" class="form-control" name="state">
-                                </div>
-                                <div class="col-md-6">
-                                  <label for="c_diff_postal_zip" class=" ">Posta / Zip <span
-                                      class="text-danger">*</span></label>
-                                  <input type="text" class="form-control" name="pincode">
-                                </div>
-                              </div>
-
-                              <div class="form-group row mb-5">
-                                <div class="col-md-6">
-                                  <label for="c_diff_email_address" class=" ">Email Address <span
-                                      class="text-danger">*</span></label>
-                                  <input type="text" class="form-control" name="email">
-                                </div>
-                                <div class="col-md-6">
-                                  <label for="c_diff_phone" class=" ">Phone <span class="text-danger">*</span></label>
-                                  <input type="text" class="form-control" name="mobile_num" placeholder="Phone Number">
-                                </div>
-                              </div>
-
-                              <button type="submit" class="btn btn-primary btn-sm py-3 btn-block">Save Address</button>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-      
+            </div>
+          </div>
+          </div>
         </div>
         <div class="col-md-6">
-          <div class="row mb-5">
-            <div class="col-md-12">
-              <h2 class="h3 mb-3">Coupon Code</h2>
-              <div class="p-3 p-lg-5 border bg-white">
-                <%if(error.length!=0){%>
-                  <div class="alert alert-danger" role="alert">
-                      <%=error%>
-                  </div>
-              <%}%>
-              <%if(success.length!=0){%>
-                <div class="alert alert-success" role="alert">
-                    <%=success%>
-                </div>
-              <%}%>
-                <label for="c_code" class=" mb-3">Enter your coupon code if you have one</label>
-                <form action="/coupon" method="post">
-                  <div class="input-group w-75 couponcode-wrap">
-                    <input type="text" class="form-control me-2" name="coupon" style="text-transform: uppercase;" placeholder="Coupon Code"
-                      aria-label="Coupon Code" aria-describedby="button-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary btn-sm" type="submit">Apply</button>
-                    </div>
-                  </div>
-                </form>
-
-              </div>
+          <div class="row">
+          <div class="col-md-12">
+            <h2 class="h3 my-3">Your Order</h2>
+            <div class="p-3 p-lg-5 border bg-white">
+              <table class="table site-block-order-table mb-5">
+                <thead>
+                  <th>Product</th>
+                  <th>Total</th>
+                </thead>
+                <tbody>
+                  <%if(cart!=null){%>
+                    <%for(let i=0;i<cart.items.length;i++){%>
+                      <%let eachItem=cart.items[i]%>
+                        <tr>
+                          <td>
+                            <%=eachItem.productId.name%><strong class="mx-2">x</strong>
+                              <%=eachItem.qty%>
+                          </td>
+                          <td>$<%=eachItem.productId.price%>
+                          </td>
+                        </tr>
+                        <%}%>
+                          <%}%>
+                          <tr>
+                            <td>Total Price</td>
+                            <td>$<%=cart.totalPrice%></td>
+                          </tr>
+                            <tr>
+                              <td class="text-black font-weight-bold"><strong>Coupon Applied</strong></td>
+                              <td class="text-black">-$<%=cart.coupon%></td>
+                            </tr>
+                            <tr>
+                              <td class="  font-weight-bold"><strong>Order Total</strong></td>
+                              <td class="  font-weight-bold"><strong>$<%=cart.totalPrice-cart.coupon%></strong></td>
+                            </tr>
+                </tbody>
+              </table>
             </div>
           </div>
-
-          <div class="row mb-5">
-            <div class="col-md-12">
-              <h2 class="h3 mb-3  ">Your Order</h2>
-              <div class="p-3 p-lg-5 border bg-white">
-                <table class="table site-block-order-table mb-5">
-                  <thead>
-                    <th>Product</th>
-                    <th>Total</th>
-                  </thead>
-                  <tbody>
-                    <%if(cart!=null){%>
-                      <%for(let i=0;i<cart.items.length;i++){%>
-                        <%let eachItem=cart.items[i]%>
-                          <tr>
-                            <td>
-                              <%=eachItem.productId.name%><strong class="mx-2">x</strong>
-                                <%=eachItem.qty%>
-                            </td>
-                            <td>$<%=eachItem.productId.price%>
-                            </td>
-                          </tr>
-                          <%}%>
-                            <%}%>
-                            <tr>
-                              <td>Total Price</td>
-                              <td>$<%=cart.totalPrice%></td>
-                            </tr>
-                              <tr>
-                                <td class="text-black font-weight-bold"><strong>Coupon Applied</strong></td>
-                                <td class="text-black">-$<%=cart.coupon%></td>
-                              </tr>
-                              <tr>
-                                <td class="  font-weight-bold"><strong>Order Total</strong></td>
-                                <td class="  font-weight-bold"><strong>$<%=cart.totalPrice-cart.coupon%></strong></td>
-                              </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
           </div>
         </div>
+        <div class="col-md-6">
+          <h2 class="h3 my-3">Shipping Details</h2>
+          <%if(address==null || address.length==0){%>
+            <p>No address added</p>
+            <%}else{%>
+              <%address.forEach((item)=>{%>
+                <%if(item.status==true){%>
+                  <div class="card">
+                    <div class="card-body">
+                      <form action="/editAddress" method="post">
+                        <input type="hidden" name="addId" value="<%=item.id%>">
+                        <button type="submit" class="float-end"style="border: 0;background-color: white;">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                          </svg>
+                        </button>
+                      </form>
+                      <h5 class="card-title">
+                        <%=item.name%>
+                      </h5>
+                      <p class="card-text">
+                        <%=item.home%>,<%=item.state%>-<%=item.pincode%>
+                      </p>
+                      <p>
+                        <%=item.mobile_num%>
+                      </p>
+                      <form action="/payment" method="post">
+                        <input type="hidden" value="<%=item.id%>" name="addressId">
+                        <input type="hidden" value="<%=cart.totalPrice-cart.coupon%>" name="totalPrice">
+                        <input type="hidden" value="<%=item.name%>" name="name">
+                        <input type="hidden" value="<%=item.home%>" name="home">
+                        <input type="hidden" value="<%=item.state%>" name="state">
+                        <input type="hidden" value="<%=item.pincode%>" name="pincode">
+                        <input type="hidden" value="<%=item.mobile_num%>" name="mobile_num">
+                        <button type="submit" class="btn btn-primary btn-sm">Deliver Here</button>
+                      </form>
+                    </div>
+                  </div>
+                <%}%>
+                <br>
+              <%})%>
+            <%}%>
+            <div class="form-group mb-5">
+              <label for="c_ship_different_address" class="text" data-bs-toggle="collapse"
+                href="#ship_different_address" role="button" aria-expanded="false"
+                aria-controls="ship_different_address"><b>Add new address </b>
+              </label>
+              <div class="collapse" id="ship_different_address">
+                <div class="py-2">
+                  <form action="/saveAdd" method="post">
+
+                    <div class="form-group row">
+                      <div class="col-md-6">
+                        <label for="c_diff_lname" class="text">Name <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="name">
+                      </div>
+                    </div>
+
+                    <div class="form-group row  mb-3">
+                      <div class="col-md-12">
+                        <label for="c_diff_address" class=" ">Address <span
+                            class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="home" placeholder="Street address">
+                      </div>
+                    </div>
+
+                    <div class="form-group row">
+                      <div class="col-md-6">
+                        <label for="c_diff_state_country" class=" ">State <span
+                            class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="state">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="c_diff_postal_zip" class=" ">Posta / Zip <span
+                            class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="pincode">
+                      </div>
+                    </div>
+
+                    <div class="form-group row mb-5">
+                      <div class="col-md-6">
+                        <label for="c_diff_email_address" class=" ">Email Address <span
+                            class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="email">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="c_diff_phone" class=" ">Phone <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="mobile_num" placeholder="Phone Number">
+                      </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-sm py-3 btn-block">Save Address</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
       </div>
-    </div>
   </div>
 
   <%-include('../../layout/footer.ejs')%>

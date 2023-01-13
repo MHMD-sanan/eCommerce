@@ -16,13 +16,8 @@
         <!-- <a href="/admin_panel/exportPDF"><i class="fa fa-file-pdf ms-2"></i></a>
         <a href="/admin_panel/exportExcel"><i class="fa fa-file-excel ms-2"></i></a> -->
     </div>
-    <div class="card">
-        <div class="card-header">
-            <i class="fas fa-table me-1"></i>
-            Sale
-        </div>
-        <div class="card-body">
-            <% if(orders!=null) { %>
+    <div class="">
+        <% if(orders!=null) { %>
             <table id="example" class="display">
                 <thead>
                     <tr>
@@ -49,7 +44,6 @@
                 </tbody>
             </table>
             <% } %>
-        </div>
     </div>
 </div>
 

@@ -33,6 +33,7 @@ exports.paymentPage = async (req, res) => {
 const Order = require('../../model/user/order');
 const Razorpay = require('razorpay');
 exports.payment=async(req,res)=>{
+    console.log('fetch call');
     paymentMethode=req.body.payment;
     try {
         if(req.body.payment=="COD"){

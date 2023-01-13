@@ -37,7 +37,7 @@ exports.editAddress2=async(req,res)=>{
 exports.updateAddress2=async(req,res)=>{
     try {
         await user.updateAddress(req.body);
-        res.redirect('back')
+        res.redirect('/address')
     } catch (error) {
         throw error
     }
